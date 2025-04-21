@@ -15,10 +15,12 @@ const Gameboard = function(){
     // renvoyer le tableau
     const getBoard = () => board;
 
+    const getBoardWithValue = function(){
+        return boardWithValue = board.map((row) => row.map((cell) => cell.getValue()));        
+    }
 
     const printBoard = function(){
-        const boardWithValue = board.map((row) => row.map((cell) => cell.getValue()));
-        console.log(boardWithValue);
+        console.log(getBoardWithValue());
     }
 
 
@@ -29,6 +31,7 @@ const Gameboard = function(){
 
     return{
         getBoard,
+        getBoardWithValue,
         printBoard,
         pickACell,
     }
@@ -86,8 +89,14 @@ const Player = function(){
     }
 }
 
+const CheckVictory = function (){
+    const game = Gameboard();
 
+    const row = function() {
+        
+    }
 
+}
 
 const GameControl = function(){
 
