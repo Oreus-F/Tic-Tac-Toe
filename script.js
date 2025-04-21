@@ -89,41 +89,41 @@ const Player = function(){
 
 
 
-// const GameControl = function(){
+const GameControl = function(){
 
-//     const game = Gameboard();
-//     const player = Player();
+    const game = Gameboard();
+    const player = Player();
 
-//     player.addPlayer("Player One", 1);
-//     player.addPlayer("Player Two", 2);
-
-
-//     let activePlayer = player.getPlayers(0);
+    player.addPlayer("Player One", 1);
+    player.addPlayer("Player Two", 2);
 
 
-//     const switchPlayers = function(){
-//         activePlayer = activePlayer === player.getPlayers(0) ? player.getPlayers(1) : player.getPlayers(0);
-//     };
+    let activePlayer = player.getPlayers(0);
 
 
-//     const getActivePlayer = () => activePlayer;
+    const switchPlayers = function(){
+        activePlayer = activePlayer === player.getPlayers(0) ? player.getPlayers(1) : player.getPlayers(0);
+    };
+
+
+    const getActivePlayer = () => activePlayer;
 
     
-//     const playRound = function(row, column){
-//         row = row -1;
-//         column = column -1;
+    const playRound = function(row, column){
+        row = row -1;
+        column = column -1;
 
-//         game.pickACell(row, column, getActivePlayer().token);
-//         switchPlayers();
-//         game.printBoard();
-//     };
+        game.pickACell(row, column, getActivePlayer().token);
+        switchPlayers();
+        game.printBoard();
+    };
 
-//     return {
-//         playRound,
-//     }
+    return {
+        playRound,
+    }
 
 
-// };
+};
 
 // Gameboard().printBoard();
 // GameControl();
