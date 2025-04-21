@@ -62,29 +62,29 @@ const Cell = function(){
 
 
 
-// const Player = function(){
+const Player = function(){
 
-//     const players = [];
+    const players = [];
 
-//     const addPlayer = function(name, token){
-//         if (players.length === 2) {alert("2 Players max"); return};
+    const addPlayer = function(name, token){
+        if (players.length === 2) {alert("2 Players max"); return};
 
-//         let player = {
-//             name : name,
-//             token : token
-//         };
+        let player = {
+            name : name,
+            token : token
+        };
 
-//         players.push(player);
-//     };
+        players.push(player);
+    };
 
 
-//     const getPlayers = (index) => players[index];
+    const getPlayers = (index) => players[index];
     
-//     return {
-//         addPlayer,
-//         getPlayers,
-//     }
-// }
+    return {
+        addPlayer,
+        getPlayers,
+    }
+}
 
 
 
