@@ -28,7 +28,6 @@ const Gameboard = function(){
         board[row][column].addToken(player);
     };
 
-
     return{
         getBoard,
         getBoardWithValue,
@@ -90,10 +89,117 @@ const Player = function(){
 }
 
 const CheckVictory = function (){
-    const game = Gameboard();
+    let result = false;
 
-    const row = function() {
+    const row = function(board) {
+
+        for (let i = 0; i < 3; i++){
+            // boucle à travers toutes les lignes
+            // s'arrête si result a été repéré
+            if (result) break;
+
+            //boucle uniquement sur les premières cases de chaque lignes
+            for (let j = 0; j < 1; j++){
+
+                //si la valeur est celle d'un joueur on vérifie que les autres le sont aussi
+                if (board[i][j] !== 0 ){
+                    const value = board[i][j];
+                    const check1 = board[i][j+1];
+                    const check2 = board[i][j+2];
+
+                    if (check1 === value && check2 === value){
+                        //si les valeurs sont bonnes on change la condition de result
+                        result = true;
+                    };
+                };
+            };
+        }
+        // on retourne la valeur pour le check 
+        return result;
+    }
+
+
+    const column = function(board){
+
+        //Boucle uniquement sur la première ligne
+        for (let i = 0; i < 1; i++){
+
+            for (let j = 0; j < 3; j++){
+                // Boucle sur les 3 premières cellules pour vérifier si une colonne a été achevé.
+                if (result) break;
+
+                if (board[i][j] !== 0){
+                    const value = board[i][j];
+                    const check1 = board[i+1][j];
+                    const check2 = board[i+2][j];
+                    
+                    if (check1 === value && check2 === value){
+                        //si les valeurs sont bonnes on change la condition de result
+                        //et on arrête la boucle
+                        result = true;
+                        break;
+                    };
+                };
+            };           
+        };
+
+        return result;
+    };
+
+
+    const diag = function(board){
+
+        if (board[0][0] !== 0){
+            const value = board[0][0];
+            const check1 = board[1][1];
+            const check2 = board[2][2];
+
+            if (check1 === value && check2 === value){
+
+                //si les valeurs sont bonnes on change la condition de result
+                result = true;
+            };
+        };
+
+        if (board[0][2] !== 0){
+            const value = board[0][2];
+            const check1 = board[1][1];
+            const check2 = board[2][0];
+            
+            if (check1 === value && check2 === value){
+                //si les valeurs sont bonnes on change la condition de result
+                result = true;
+            };
+        };
+
+        return result;
+    };
+
+
+    const win = function(board, player){
+        if (row(board) === true || column(board) === true || diag(board) === true) alert(`${player} win !`)
+    }
+
+
+    const tie = function(board){
+        let temoin = 0;
+        for (let i=0; i<3; i++){
+            for(let j=0; j<3; j++){
+
+                // ignore if the value it's neutral
+                if(board[i][j] === 0) continue;
+                else temoin += 1
+
+            };
+        }
+
+        if (temoin === 9) {alert("IT'S A TIE")}
         
+    }
+
+    return {
+        win,
+        tie,
     }
 
 }
@@ -102,6 +208,7 @@ const GameControl = function(){
 
     const game = Gameboard();
     const player = Player();
+    const check = CheckVictory();
 
     player.addPlayer("Player One", 1);
     player.addPlayer("Player Two", 2);
@@ -121,8 +228,14 @@ const GameControl = function(){
     const playRound = function(row, column){
         // row = row -1;
         // column = column -1;
-
+        
         game.pickACell(row, column, getActivePlayer().token);
+        
+        const temoin = game.getBoardWithValue();
+        check.win(temoin, getActivePlayer().name);
+        check.tie(temoin);
+        
+
         switchPlayers();
         game.printBoard();
     };
@@ -137,4 +250,3 @@ const GameControl = function(){
 Gameboard().printBoard();
 GameControl();
 const game = GameControl();
-
