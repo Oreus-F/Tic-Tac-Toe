@@ -110,8 +110,8 @@ const GameControl = function(){
 
     
     const playRound = function(row, column){
-        row = row -1;
-        column = column -1;
+        // row = row -1;
+        // column = column -1;
 
         game.pickACell(row, column, getActivePlayer().token);
         switchPlayers();
