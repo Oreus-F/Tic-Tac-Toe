@@ -125,6 +125,7 @@ const GameControl = function(){
 
 };
 
-// Gameboard().printBoard();
-// GameControl();
+Gameboard().printBoard();
+GameControl();
+const game = GameControl();
 
