@@ -12,6 +12,10 @@ body{
     grid-template-columns: 1fr 2fr;
 }
 
+.hidden{
+    display: none;
+}
+
 
 .infoArea{
     display: flex;
