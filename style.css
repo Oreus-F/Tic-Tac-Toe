@@ -1,3 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 16px;
+}
+
+body{
+    height: 100vh;
+    width: auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+
+.infoArea{
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    align-items: center;
+}
+
+#newGame{
+    height: 100px;
+    width: 75%;
+}
+
+.playArea{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
 
 #container{
     display: grid;
