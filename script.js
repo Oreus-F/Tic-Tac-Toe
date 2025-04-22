@@ -202,7 +202,6 @@ const GameControl = function(){
     const player = Player();
     const check = CheckVictory();
     
-    const container = document.querySelector("#container");
     
     player.addPlayer("Player One", "X");
     player.addPlayer("Player Two", "O");
@@ -232,26 +231,39 @@ const GameControl = function(){
         game.printBoard();
     };
     
-    game.getBoard().forEach((row, index) => {
-        const arg = index
-        row.forEach((cell, index) => {
-            const button = document.createElement("button");
-            button.setAttribute("class", "cell");
-            // IF NO USE IN CSS DELETE THESE TWO LINES
-            button.setAttribute("data-row", arg);
-            button.setAttribute("data-column", index);
-
-            button.addEventListener("click", function(){
-                playRound(arg, index);
-                button.textContent = cell.getValue();
-            }, {once:true})
-            
-            container.appendChild(button);
-        })
-    })
+    
+    const newBoard = function(){
+        game.getBoard().forEach((row, index) => {
+            const arg = index
+            row.forEach((cell, index) => {
+                const button = document.createElement("button");
+                button.setAttribute("class", "cell");
+                // IF NO USE IN CSS DELETE THESE TWO LINES
+                button.setAttribute("data-row", arg);
+                button.setAttribute("data-column", index);
         
+                button.addEventListener("click", function(){
+                    playRound(arg, index);
+                    button.textContent = cell.getValue();
+                }, {once:true})
+                
+                container.appendChild(button);
+            })
+        })
+    }
+
+    return{
+        playRound,
+        newBoard,
+    }
     
 };
 
 
-const game = GameControl();
+const Display = function(){
+    const game = GameControl()
+    const container = document.querySelector("#container");
+    
+}
+
+const game = GameControl().newBoard();
