@@ -201,6 +201,9 @@ const GameControl = function(){
     const game = Gameboard();
     const player = Player();
     const check = CheckVictory();
+
+
+    const newGameButton = document.querySelector("#newGame");
     
     
     player.addPlayer("Player One", "X");
@@ -232,38 +235,56 @@ const GameControl = function(){
     };
     
     
-    const newBoard = function(){
-        game.getBoard().forEach((row, index) => {
-            const arg = index
-            row.forEach((cell, index) => {
-                const button = document.createElement("button");
-                button.setAttribute("class", "cell");
-                // IF NO USE IN CSS DELETE THESE TWO LINES
-                button.setAttribute("data-row", arg);
-                button.setAttribute("data-column", index);
+    
+    const Display = function(){
         
-                button.addEventListener("click", function(){
-                    playRound(arg, index);
-                    button.textContent = cell.getValue();
-                }, {once:true})
-                
-                container.appendChild(button);
-            })
-        })
-    }
+        const container = document.querySelector("#container");
+        const newGameButton = document.querySelector("#newGame")
+        
+        const newBoard = function(){
+            const grid = container.children;
+            if (grid.length === 9){
+                container.replaceChildren();
+            } 
 
+            game.getBoard().forEach((row, index) => {
+                const arg = index
+                row.forEach((cell, index) => {
+                    const button = document.createElement("button");
+                    button.setAttribute("class", "cell");
+                    // IF NO USE IN CSS DELETE THESE TWO LINES
+                    button.setAttribute("data-row", arg);
+                    button.setAttribute("data-column", index);
+            
+                    button.addEventListener("click", function(){
+                        playRound(arg, index);
+                        button.textContent = cell.getValue();
+                    }, {once:true})
+                    
+                    container.appendChild(button);
+                })
+            })
+        }
+        
+        const newGameDisplay = function(){
+            newGameButton.classList.toggle("hidden")
+        }
+    
+        newGameButton.addEventListener("click", function(){newGameDisplay()})
+        
+        return{
+            newBoard,
+        }
+    
+    }
+    
     return{
         playRound,
-        newBoard,
+        Display,
     }
     
 };
 
 
-const Display = function(){
-    const game = GameControl()
-    const container = document.querySelector("#container");
-    
-}
 
-const game = GameControl().newBoard();
+const game = GameControl().Display().newBoard();
