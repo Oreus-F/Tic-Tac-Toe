@@ -235,6 +235,7 @@ const GameControl = function(){
     };
     
     
+    newGameButton.addEventListener("click", function(){Display().newGameDisplay()})
     
     const Display = function(){
         
@@ -267,13 +268,13 @@ const GameControl = function(){
         }
         
         const newGameDisplay = function(){
-            newGameButton.classList.toggle("hidden")
+            newGameButton.setAttribute("class", "hidden")
         }
     
-        newGameButton.addEventListener("click", function(){newGameDisplay()})
         
         return{
             newBoard,
+            newGameDisplay
         }
     
     }
