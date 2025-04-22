@@ -245,6 +245,7 @@ const GameControl = function(){
         row.forEach((cell, index) => {
             const button = document.createElement("button");
             button.setAttribute("class", "cell");
+            // IF NO USE IN CSS DELETE THESE TWO LINES
             button.setAttribute("data-row", arg);
             button.setAttribute("data-column", index);
 
