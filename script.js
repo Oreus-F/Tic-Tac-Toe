@@ -40,15 +40,7 @@ const Gameboard = function(){
 const Cell = function(){
     let value = 0;
     
-    
-    // change la value par rapport au player
-    // DOIT IMPERATIVEMENT METTRE LA VALEUR DU PLAYER ET NON PAS L'OBJ
-    // vérifie qui la valeur n'est pas 0 
     const addToken = function(player){
-        if (value !== 0) {
-            console.log("This cell's taken please try again")
-            return;
-        }
         value = player;
     };
     
@@ -56,7 +48,7 @@ const Cell = function(){
     const getValue = () => value;
     
     return {
-        // Chaque cellule crééer dans le tableau pourra appeler ces deux fonctions
+        // Chaque cellule créée dans le tableau pourra appeler ces deux fonctions
         addToken,
         getValue,
     }
@@ -212,8 +204,8 @@ const GameControl = function(){
     
     const container = document.querySelector("#container");
     
-    player.addPlayer("Player One", 1);
-    player.addPlayer("Player Two", 2);
+    player.addPlayer("Player One", "X");
+    player.addPlayer("Player Two", "O");
     
     
     let activePlayer = player.getPlayers(0);
@@ -254,7 +246,6 @@ const GameControl = function(){
                 button.textContent = cell.getValue();
             }, {once:true})
             
-            button.textContent = cell.getValue();            
             container.appendChild(button);
         })
     })
