@@ -228,20 +228,16 @@ const GameControl = function(){
     
     const getNewPlayer = function(event){
         
-        console.log("getNewPlayer : STARTED")
         
         let playerData = new FormData(event.target);
         playerData = Object.fromEntries(playerData.entries());
 
-        console.log(`player one = ${playerData.p1Name}`)
         
         player.addPlayer(playerData.p1Name, "X");
         player.addPlayer(playerData.p2Name, "O");
         
 
         activePlayer = player.getPlayers(0);
-        console.log(`active player is : ${activePlayer.name}`)
-        console.log("getNewPlayer : DONE")
         
     }
     
@@ -254,20 +250,20 @@ const GameControl = function(){
     
     const getActivePlayer = () => activePlayer;
     
-    const resetBoard = function(){
-        const board = game.getBoard();
+    // const resetBoard = function(){
+    //     const board = game.getBoard();
 
-        for (let i = 0; i< 3; i++){
-            // delete previous Cell();
-            board[i].slice(2, 3);
-            board[i] = [];
-            for (let j = 0; j< 3; j++){
-                // qui créer une cellule
-                board[i].push(Cell());
-            }
-        };
+    //     for (let i = 0; i< 3; i++){
+    //         // delete previous Cell();
+    //         board[i].slice(2, 3);
+    //         board[i] = [];
+    //         for (let j = 0; j< 3; j++){
+    //             // qui créer une cellule
+    //             board[i].push(Cell());
+    //         }
+    //     };
     
-    }
+    // }
     
     const stopGame = function(){
         
@@ -287,7 +283,6 @@ const GameControl = function(){
         game.pickACell(row, column, getActivePlayer().token);
         
         const temoin = game.getBoardWithValue();
-        console.log(temoin)
         
         
         if(check.win(temoin)){
