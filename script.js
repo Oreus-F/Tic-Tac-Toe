@@ -230,6 +230,8 @@ const GameControl = function(){
         game.pickACell(row, column, getActivePlayer().token);
         
         const temoin = game.getBoardWithValue();
+
+
         check.win(temoin, getActivePlayer().name);
         check.tie(temoin);
         
@@ -237,6 +239,13 @@ const GameControl = function(){
         switchPlayers();
         game.printBoard();
     };
+
+    const stopGame = function(){
+        const board = game.getBoard;
+
+        board.forEach(row => {row.forEach(cell => {cell.removeEventListener()})})
+
+    }
     
     return{
         playRound,
@@ -280,7 +289,7 @@ const ScreenControl = function(){
                 container.appendChild(button);
             })
         })   
-        
+      
     }
     
     askNewGameButton.addEventListener("click", function(){initNewGame()})
@@ -300,7 +309,7 @@ const ScreenControl = function(){
     }
 
     const hidePanelShowScore = function(){
-        newPlayerData.classList.remove("hidden")
+        newPlayerData.classList.toggle("hidden")
     }
 
 
