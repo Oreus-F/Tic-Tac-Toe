@@ -1,16 +1,24 @@
 const Gameboard = function(){
     
     const grid = 3;
-    const board = [];
+    let board = [];
     
-    for (let i = 0; i< grid; i++){
-        // créer une rangée
-        board[i] = []
-        for (let j = 0; j< grid; j++){
-            // qui créer une cellule
-            board[i].push(Cell());
-        }
-    };
+
+
+    const createBoard = function(){
+
+        let newBoard = []
+        for (let i = 0; i< grid; i++){
+            // créer une rangée
+            newBoard[i] = []
+            for (let j = 0; j< grid; j++){
+                // qui créer une cellule
+                newBoard[i].push(Cell());
+            }
+        };
+
+        return board = newBoard;
+    }
     
     // renvoyer le tableau
     const getBoard = () => board;
@@ -22,6 +30,7 @@ const Gameboard = function(){
     const printBoard = function(){
         console.log(getBoardWithValue());
     }
+
     
     
     const pickACell = function(row, column, player){
@@ -33,6 +42,7 @@ const Gameboard = function(){
         getBoardWithValue,
         printBoard,
         pickACell,
+        createBoard
     }
 };
 
@@ -58,10 +68,11 @@ const Cell = function(){
 
 const Player = function(){
     
-    const players = [];
+    let players = [];
     
     const addPlayer = function(name, token){
-        if (players.length === 2) {alert("2 Players max"); return};
+        if (players.length === 2) {players = []};
+
         
         let player = {
             name : name,
@@ -70,6 +81,7 @@ const Player = function(){
         
         players.push(player);
     };
+
     
     
     const getPlayers = (index) => players[index];
@@ -81,9 +93,9 @@ const Player = function(){
 }
 
 const CheckVictory = function (){
-    let result = false;
     
     const row = function(board) {
+        let result;
         
         for (let i = 0; i < 3; i++){
             // boucle à travers toutes les lignes
@@ -112,6 +124,8 @@ const CheckVictory = function (){
     
     
     const column = function(board){
+        let result;
+
         
         //Boucle uniquement sur la première ligne
         for (let i = 0; i < 1; i++){
@@ -140,6 +154,8 @@ const CheckVictory = function (){
     
     
     const diag = function(board){
+        let result;
+
         
         if (board[0][0] !== 0){
             const value = board[0][0];
@@ -168,9 +184,9 @@ const CheckVictory = function (){
     };
     
     
-    const win = function(board, player){
-        if (row(board) === true || column(board) === true || diag(board) === true) alert(`${player} win !`)
-        }
+    const win = function(board){
+        if (row(board) === true || column(board) === true || diag(board) === true) {return true;}
+    }
     
     
     const tie = function(board){
@@ -185,7 +201,7 @@ const CheckVictory = function (){
             };
         }
         
-        if (temoin === 9) {alert("IT'S A TIE")}
+        if (temoin === 9) {return true;}
         
     }
     
@@ -202,17 +218,31 @@ const GameControl = function(){
     const player = Player();
     const check = CheckVictory();
     
+    const container = document.querySelector("#container");
+    
+    const startGame = function(){
+
+        game.createBoard();
+
+    }
+    
     const getNewPlayer = function(event){
-    
-    
+        
+        console.log("getNewPlayer : STARTED")
+        
         let playerData = new FormData(event.target);
         playerData = Object.fromEntries(playerData.entries());
-    
+
+        console.log(`player one = ${playerData.p1Name}`)
+        
         player.addPlayer(playerData.p1Name, "X");
         player.addPlayer(playerData.p2Name, "O");
-    
-    
-        return activePlayer = player.getPlayers(0);
+        
+
+        activePlayer = player.getPlayers(0);
+        console.log(`active player is : ${activePlayer.name}`)
+        console.log("getNewPlayer : DONE")
+        
     }
     
     
@@ -224,33 +254,60 @@ const GameControl = function(){
     
     const getActivePlayer = () => activePlayer;
     
+    const resetBoard = function(){
+        const board = game.getBoard();
+
+        for (let i = 0; i< 3; i++){
+            // delete previous Cell();
+            board[i].slice(2, 3);
+            board[i] = [];
+            for (let j = 0; j< 3; j++){
+                // qui créer une cellule
+                board[i].push(Cell());
+            }
+        };
+    
+    }
+    
+    const stopGame = function(){
+        
+        const cell = container.children;
+        
+        for ( let i = 0; i < cell.length; i++){
+            cell[i].setAttribute("disabled", true);
+        }
+        
+        // resetBoard();
+    };
+    
+    
     
     const playRound = function(row, column){
         
         game.pickACell(row, column, getActivePlayer().token);
         
         const temoin = game.getBoardWithValue();
-
-
-        check.win(temoin, getActivePlayer().name);
-        check.tie(temoin);
+        console.log(temoin)
         
         
-        switchPlayers();
-        game.printBoard();
+        if(check.win(temoin)){
+            stopGame();
+            alert(`${activePlayer.name} victory !`)
+        } else if(check.tie(temoin)){
+            stopGame();
+            alert("IT'S A TIE !");
+        } else {
+            switchPlayers();
+        }
+        
     };
 
-    const stopGame = function(){
-        const board = game.getBoard;
-
-        board.forEach(row => {row.forEach(cell => {cell.removeEventListener()})})
-
-    }
     
     return{
         playRound,
         getNewPlayer,
         getBoard: game.getBoard,
+        startGame,
     }
     
 };
@@ -267,6 +324,7 @@ const ScreenControl = function(){
     const newPlayerData= document.querySelector("#newPlayerData");
     
     const newBoard = function(){
+
         const grid = container.children;
         if (grid.length === 9){
             container.replaceChildren();
@@ -284,20 +342,25 @@ const ScreenControl = function(){
                 button.addEventListener("click", function(){
                     game.playRound(arg, index);
                     button.textContent = cell.getValue();
+
                 }, {once:true})
                 
                 container.appendChild(button);
             })
-        })   
-      
+        })
+        
+        
     }
+    
+
     
     askNewGameButton.addEventListener("click", function(){initNewGame()})
     
     newPlayerData.addEventListener("submit", function(event){
         event.preventDefault();
-        
+
         game.getNewPlayer(event);
+        game.startGame();
         hidePanelShowScore();
         newBoard();
 
