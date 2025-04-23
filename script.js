@@ -1,24 +1,20 @@
 const Gameboard = function(){
     
     const grid = 3;
-    let board = [];
+    const board = [];
     
-
-
-    const createBoard = function(){
-
-        let newBoard = []
-        for (let i = 0; i< grid; i++){
-            // créer une rangée
-            newBoard[i] = []
-            for (let j = 0; j< grid; j++){
-                // qui créer une cellule
-                newBoard[i].push(Cell());
-            }
-        };
-
-        return board = newBoard;
-    }
+    
+    
+    
+    for (let i = 0; i< grid; i++){
+        // créer une rangée
+        board[i] = []
+        for (let j = 0; j< grid; j++){
+            // qui créer une cellule
+            board[i].push(Cell());
+        }
+    };
+    
     
     // renvoyer le tableau
     const getBoard = () => board;
@@ -30,7 +26,7 @@ const Gameboard = function(){
     const printBoard = function(){
         console.log(getBoardWithValue());
     }
-
+    
     
     
     const pickACell = function(row, column, player){
@@ -42,7 +38,6 @@ const Gameboard = function(){
         getBoardWithValue,
         printBoard,
         pickACell,
-        createBoard
     }
 };
 
@@ -72,7 +67,7 @@ const Player = function(){
     
     const addPlayer = function(name, token){
         if (players.length === 2) {players = []};
-
+        
         
         let player = {
             name : name,
@@ -81,7 +76,7 @@ const Player = function(){
         
         players.push(player);
     };
-
+    
     
     
     const getPlayers = (index) => players[index];
@@ -125,7 +120,7 @@ const CheckVictory = function (){
     
     const column = function(board){
         let result;
-
+        
         
         //Boucle uniquement sur la première ligne
         for (let i = 0; i < 1; i++){
@@ -155,7 +150,7 @@ const CheckVictory = function (){
     
     const diag = function(board){
         let result;
-
+        
         
         if (board[0][0] !== 0){
             const value = board[0][0];
@@ -219,24 +214,19 @@ const GameControl = function(){
     const check = CheckVictory();
     
     const container = document.querySelector("#container");
-    
-    const startGame = function(){
 
-        game.createBoard();
-
-    }
     
     const getNewPlayer = function(event){
         
         
         let playerData = new FormData(event.target);
         playerData = Object.fromEntries(playerData.entries());
-
+        
         
         player.addPlayer(playerData.p1Name, "X");
         player.addPlayer(playerData.p2Name, "O");
         
-
+        
         activePlayer = player.getPlayers(0);
         
     }
@@ -250,20 +240,20 @@ const GameControl = function(){
     
     const getActivePlayer = () => activePlayer;
     
-    // const resetBoard = function(){
-    //     const board = game.getBoard();
-
-    //     for (let i = 0; i< 3; i++){
-    //         // delete previous Cell();
-    //         board[i].slice(2, 3);
-    //         board[i] = [];
-    //         for (let j = 0; j< 3; j++){
-    //             // qui créer une cellule
-    //             board[i].push(Cell());
-    //         }
-    //     };
+    const resetBoard = function(){
+        const board = game.getBoard();
     
-    // }
+        for (let i = 0; i< 3; i++){
+            // delete previous Cell();
+            board[i].slice(2, 3);
+            board[i] = [];
+            for (let j = 0; j< 3; j++){
+                // qui créer une cellule
+                board[i].push(Cell());
+            }
+        };
+    
+    }
     
     const stopGame = function(){
         
@@ -273,7 +263,7 @@ const GameControl = function(){
             cell[i].setAttribute("disabled", true);
         }
         
-        // resetBoard();
+        resetBoard();
     };
     
     
@@ -296,30 +286,29 @@ const GameControl = function(){
         }
         
     };
-
+    
     
     return{
         playRound,
         getNewPlayer,
         getBoard: game.getBoard,
-        startGame,
     }
     
 };
 
 const ScreenControl = function(){
-
+    
     const game = GameControl();
     
     
     const container = document.querySelector("#container");
-
+    
     const askNewGameButton = document.querySelector("#askNewGame");
     
     const newPlayerData= document.querySelector("#newPlayerData");
     
     const newBoard = function(){
-
+        
         const grid = container.children;
         if (grid.length === 9){
             container.replaceChildren();
@@ -337,7 +326,7 @@ const ScreenControl = function(){
                 button.addEventListener("click", function(){
                     game.playRound(arg, index);
                     button.textContent = cell.getValue();
-
+                    
                 }, {once:true})
                 
                 container.appendChild(button);
@@ -347,33 +336,32 @@ const ScreenControl = function(){
         
     }
     
-
+    
     
     askNewGameButton.addEventListener("click", function(){initNewGame()})
     
     newPlayerData.addEventListener("submit", function(event){
         event.preventDefault();
-
+        
         game.getNewPlayer(event);
-        game.startGame();
         hidePanelShowScore();
         newBoard();
-
+        
     })
     
     const initNewGame = function(){
         // newGameButton.classList.toggle("hidden");
         newPlayerData.classList.toggle("hidden");
     }
-
+    
     const hidePanelShowScore = function(){
         newPlayerData.classList.toggle("hidden")
     }
-
-
     
-
-
+    
+    
+    
+    
     
     return{
         newBoard,
