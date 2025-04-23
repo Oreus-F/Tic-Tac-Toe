@@ -201,13 +201,6 @@ const GameControl = function(){
     const game = Gameboard();
     const player = Player();
     const check = CheckVictory();
-
-
-    const newGameButton = document.querySelector("#newGame");
-    
-    
-    player.addPlayer("Player One", "X");
-    player.addPlayer("Player Two", "O");
     
     
     let activePlayer = player.getPlayers(0);
@@ -234,58 +227,87 @@ const GameControl = function(){
         game.printBoard();
     };
     
-    
-    newGameButton.addEventListener("click", function(){Display().newGameDisplay()})
-    
-    const Display = function(){
-        
-        const container = document.querySelector("#container");
-        const newGameButton = document.querySelector("#newGame")
-        
-        const newBoard = function(){
-            const grid = container.children;
-            if (grid.length === 9){
-                container.replaceChildren();
-            } 
-
-            game.getBoard().forEach((row, index) => {
-                const arg = index
-                row.forEach((cell, index) => {
-                    const button = document.createElement("button");
-                    button.setAttribute("class", "cell");
-                    // IF NO USE IN CSS DELETE THESE TWO LINES
-                    button.setAttribute("data-row", arg);
-                    button.setAttribute("data-column", index);
-            
-                    button.addEventListener("click", function(){
-                        playRound(arg, index);
-                        button.textContent = cell.getValue();
-                    }, {once:true})
-                    
-                    container.appendChild(button);
-                })
-            })
-        }
-        
-        const newGameDisplay = function(){
-            newGameButton.setAttribute("class", "hidden")
-        }
-    
-        
-        return{
-            newBoard,
-            newGameDisplay
-        }
-    
-    }
-    
     return{
         playRound,
-        Display,
+        getBoard: game.getBoard,
+        getPlayers: player.getPlayers,
     }
     
 };
 
+const ScreenControl = function(){
+
+    const game = GameControl();
+    
+    
+    const container = document.querySelector("#container");
+
+    const askNewGameButton = document.querySelector("#askNewGame");
+    const startNewGameButton = document.querySelector("#startNewGame");
+    
+    const newPlayerData= document.querySelector("#newPlayerData");
+    
+    const newBoard = function(){
+        const grid = container.children;
+        if (grid.length === 9){
+            container.replaceChildren();
+        } 
+        
+        game.getBoard().forEach((row, index) => {
+            const arg = index
+            row.forEach((cell, index) => {
+                const button = document.createElement("button");
+                button.setAttribute("class", "cell");
+                // IF NO USE IN CSS DELETE THESE TWO LINES
+                button.setAttribute("data-row", arg);
+                button.setAttribute("data-column", index);
+                
+                button.addEventListener("click", function(){
+                    game.playRound(arg, index);
+                    button.textContent = cell.getValue();
+                }, {once:true})
+                
+                container.appendChild(button);
+            })
+        })   
+        
+    }
+    
+    askNewGameButton.addEventListener("click", function(){initNewGame()})
+    
+    newPlayerData.addEventListener("submit", function(event){
+        event.preventDefault();
+        
+        getNewPlayer(event);
+
+    })
+    
+    const initNewGame = function(){
+        // newGameButton.classList.toggle("hidden");
+        newPlayerData.classList.toggle("hidden");
+    }
 
 
-const game = GameControl().Display().newBoard();
+    
+    const getNewPlayer = function(event){
+
+
+        let playerData = new FormData(event.target);
+        playerData = Object.fromEntries(playerData.entries());
+
+        console.log(playerData[0])
+
+        
+
+    }
+
+
+    
+    return{
+        newBoard,
+    }
+    
+}
+
+
+const game = ScreenControl().newBoard();
