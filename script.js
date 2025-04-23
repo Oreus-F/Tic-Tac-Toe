@@ -202,8 +202,19 @@ const GameControl = function(){
     const player = Player();
     const check = CheckVictory();
     
+    const getNewPlayer = function(event){
     
-    let activePlayer = player.getPlayers(0);
+    
+        let playerData = new FormData(event.target);
+        playerData = Object.fromEntries(playerData.entries());
+    
+        player.addPlayer(playerData.p1Name, "X");
+        player.addPlayer(playerData.p2Name, "O");
+    
+    
+        return activePlayer = player.getPlayers(0);
+    }
+    
     
     
     const switchPlayers = function(){
@@ -229,8 +240,8 @@ const GameControl = function(){
     
     return{
         playRound,
+        getNewPlayer,
         getBoard: game.getBoard,
-        getPlayers: player.getPlayers,
     }
     
 };
@@ -243,7 +254,6 @@ const ScreenControl = function(){
     const container = document.querySelector("#container");
 
     const askNewGameButton = document.querySelector("#askNewGame");
-    const startNewGameButton = document.querySelector("#startNewGame");
     
     const newPlayerData= document.querySelector("#newPlayerData");
     
@@ -278,7 +288,9 @@ const ScreenControl = function(){
     newPlayerData.addEventListener("submit", function(event){
         event.preventDefault();
         
-        getNewPlayer(event);
+        game.getNewPlayer(event);
+        hidePanelShowScore();
+        newBoard();
 
     })
     
@@ -287,19 +299,12 @@ const ScreenControl = function(){
         newPlayerData.classList.toggle("hidden");
     }
 
+    const hidePanelShowScore = function(){
+        newPlayerData.classList.remove("hidden")
+    }
+
 
     
-    const getNewPlayer = function(event){
-
-
-        let playerData = new FormData(event.target);
-        playerData = Object.fromEntries(playerData.entries());
-
-        console.log(playerData[0])
-
-        
-
-    }
 
 
     
