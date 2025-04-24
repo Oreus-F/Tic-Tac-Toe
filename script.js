@@ -197,6 +197,7 @@ const GameControl = function(){
     const check = CheckVictory();
     
     const container = document.querySelector("#container");
+    const newGameButton = document.querySelector("#askNewGame");
 
     
     const getNewPlayer = function(event){
@@ -246,6 +247,7 @@ const GameControl = function(){
         }
         
         resetBoard();
+        newGameButton.classList.toggle("hidden")
     };
     
     
@@ -287,7 +289,7 @@ const ScreenControl = function(){
     
     
     const container = document.querySelector("#container");
-    const askNewGameButton = document.querySelector("#askNewGame");
+    const newGameButton = document.querySelector("#askNewGame");
     const newPlayerData= document.querySelector("#newPlayerData");
     const resetButton = document.querySelector("#reset");
 
@@ -323,7 +325,7 @@ const ScreenControl = function(){
     }
     
     
-    askNewGameButton.addEventListener("click", function(){initNewGame()});
+    newGameButton.addEventListener("click", function(){initNewGame()});
     resetButton.addEventListener("click", function(){resetGame()});
     
 
@@ -338,7 +340,7 @@ const ScreenControl = function(){
     
 
     const initNewGame = function(){
-        // newGameButton.classList.toggle("hidden");
+        newGameButton.classList.toggle("hidden");
         newPlayerData.classList.toggle("hidden");
     }
 
@@ -353,12 +355,32 @@ const ScreenControl = function(){
         newPlayerData.classList.toggle("hidden")
     };
     
+    const initDisplay = (function(){
+        
+        game.getBoard().forEach((row, index) => {
+            const arg = index
+            row.forEach((cell, index) => {
+                const button = document.createElement("button");
+                button.setAttribute("class", "cell");
+                button.setAttribute("disabled", true)
     
-    return{
-        newDisplay,
-    }
+                // A SUPPRIMER SI PAS UTILISER CSS
+                button.setAttribute("data-row", arg);
+                button.setAttribute("data-column", index);
+                
+                button.addEventListener("click", function(){
+                    game.playRound(arg, index);
+                    button.textContent = cell.getValue();
+                    
+                }, {once:true})
+                
+                container.appendChild(button);
+            })
+        })
+        
+    })();
     
 }
 
 
-const game = ScreenControl().newDisplay();
+const game = ScreenControl()
