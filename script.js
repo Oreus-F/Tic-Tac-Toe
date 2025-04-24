@@ -7,27 +7,18 @@ const Gameboard = function(){
     
     
     for (let i = 0; i< grid; i++){
-        // créer une rangée
         board[i] = []
         for (let j = 0; j< grid; j++){
-            // qui créer une cellule
             board[i].push(Cell());
         }
     };
     
     
-    // renvoyer le tableau
     const getBoard = () => board;
     
     const getBoardWithValue = function(){
         return boardWithValue = board.map((row) => row.map((cell) => cell.getValue()));        
     }
-    
-    const printBoard = function(){
-        console.log(getBoardWithValue());
-    }
-    
-    
     
     const pickACell = function(row, column, player){
         board[row][column].addToken(player);
@@ -36,7 +27,6 @@ const Gameboard = function(){
     return{
         getBoard,
         getBoardWithValue,
-        printBoard,
         pickACell,
     }
 };
@@ -49,16 +39,13 @@ const Cell = function(){
         value = player;
     };
     
-    // retourn la valeur de la cellule ciblée
     const getValue = () => value;
     
     return {
-        // Chaque cellule créée dans le tableau pourra appeler ces deux fonctions
         addToken,
         getValue,
     }
 }
-
 
 
 const Player = function(){
@@ -87,33 +74,30 @@ const Player = function(){
     }
 }
 
+
 const CheckVictory = function (){
     
+
     const row = function(board) {
         let result;
         
         for (let i = 0; i < 3; i++){
-            // boucle à travers toutes les lignes
-            // s'arrête si result a été repéré
             if (result) break;
             
-            //boucle uniquement sur les premières cases de chaque lignes
             for (let j = 0; j < 1; j++){
                 
-                //si la valeur est celle d'un joueur on vérifie que les autres le sont aussi
                 if (board[i][j] !== 0 ){
                     const value = board[i][j];
                     const check1 = board[i][j+1];
                     const check2 = board[i][j+2];
                     
                     if (check1 === value && check2 === value){
-                        //si les valeurs sont bonnes on change la condition de result
                         result = true;
                     };
                 };
             };
         }
-        // on retourne la valeur pour le check 
+
         return result;
     }
     
@@ -121,12 +105,9 @@ const CheckVictory = function (){
     const column = function(board){
         let result;
         
-        
-        //Boucle uniquement sur la première ligne
         for (let i = 0; i < 1; i++){
             
             for (let j = 0; j < 3; j++){
-                // Boucle sur les 3 premières cellules pour vérifier si une colonne a été achevé.
                 if (result) break;
                 
                 if (board[i][j] !== 0){
@@ -135,8 +116,6 @@ const CheckVictory = function (){
                     const check2 = board[i+2][j];
                     
                     if (check1 === value && check2 === value){
-                        //si les valeurs sont bonnes on change la condition de result
-                        //et on arrête la boucle
                         result = true;
                         break;
                     };
@@ -158,8 +137,6 @@ const CheckVictory = function (){
             const check2 = board[2][2];
             
             if (check1 === value && check2 === value){
-                
-                //si les valeurs sont bonnes on change la condition de result
                 result = true;
             };
         };
@@ -170,7 +147,6 @@ const CheckVictory = function (){
             const check2 = board[2][0];
             
             if (check1 === value && check2 === value){
-                //si les valeurs sont bonnes on change la condition de result
                 result = true;
             };
         };
@@ -185,11 +161,12 @@ const CheckVictory = function (){
     
     
     const tie = function(board){
+
         let temoin = 0;
+
         for (let i=0; i<3; i++){
             for(let j=0; j<3; j++){
-                
-                // ignore if the value it's neutral
+
                 if(board[i][j] === 0) continue;
                 else temoin += 1
                 
@@ -198,7 +175,8 @@ const CheckVictory = function (){
         
         if (temoin === 9) {return true;}
         
-    }
+    };
+
     
     return {
         win,
@@ -206,6 +184,7 @@ const CheckVictory = function (){
     }
     
 }
+
 
 const GameControl = function(){
     
@@ -217,7 +196,6 @@ const GameControl = function(){
 
     
     const getNewPlayer = function(event){
-        
         
         let playerData = new FormData(event.target);
         playerData = Object.fromEntries(playerData.entries());
@@ -232,7 +210,6 @@ const GameControl = function(){
     }
     
     
-    
     const switchPlayers = function(){
         activePlayer = activePlayer === player.getPlayers(0) ? player.getPlayers(1) : player.getPlayers(0);
     };
@@ -240,20 +217,21 @@ const GameControl = function(){
     
     const getActivePlayer = () => activePlayer;
     
+
     const resetBoard = function(){
+
         const board = game.getBoard();
     
         for (let i = 0; i< 3; i++){
-            // delete previous Cell();
             board[i].slice(2, 3);
             board[i] = [];
             for (let j = 0; j< 3; j++){
-                // qui créer une cellule
                 board[i].push(Cell());
             }
         };
     
     }
+
     
     const stopGame = function(){
         
@@ -265,7 +243,6 @@ const GameControl = function(){
         
         resetBoard();
     };
-    
     
     
     const playRound = function(row, column){
@@ -296,16 +273,16 @@ const GameControl = function(){
     
 };
 
+
 const ScreenControl = function(){
     
     const game = GameControl();
     
     
     const container = document.querySelector("#container");
-    
     const askNewGameButton = document.querySelector("#askNewGame");
-    
     const newPlayerData= document.querySelector("#newPlayerData");
+
     
     const newBoard = function(){
         
@@ -319,7 +296,8 @@ const ScreenControl = function(){
             row.forEach((cell, index) => {
                 const button = document.createElement("button");
                 button.setAttribute("class", "cell");
-                // IF NO USE IN CSS DELETE THESE TWO LINES
+
+                // A SUPPRIMER SI PAS UTILISER CSS
                 button.setAttribute("data-row", arg);
                 button.setAttribute("data-column", index);
                 
@@ -337,9 +315,9 @@ const ScreenControl = function(){
     }
     
     
-    
     askNewGameButton.addEventListener("click", function(){initNewGame()})
     
+
     newPlayerData.addEventListener("submit", function(event){
         event.preventDefault();
         
@@ -349,6 +327,7 @@ const ScreenControl = function(){
         
     })
     
+
     const initNewGame = function(){
         // newGameButton.classList.toggle("hidden");
         newPlayerData.classList.toggle("hidden");
@@ -357,10 +336,6 @@ const ScreenControl = function(){
     const hidePanelShowScore = function(){
         newPlayerData.classList.toggle("hidden")
     }
-    
-    
-    
-    
     
     
     return{
