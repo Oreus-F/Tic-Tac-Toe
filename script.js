@@ -269,6 +269,7 @@ const GameControl = function(){
         playRound,
         getNewPlayer,
         getBoard: game.getBoard,
+        resetBoard,
     }
     
 };
@@ -282,6 +283,7 @@ const ScreenControl = function(){
     const container = document.querySelector("#container");
     const askNewGameButton = document.querySelector("#askNewGame");
     const newPlayerData= document.querySelector("#newPlayerData");
+    const resetButton = document.querySelector("#reset");
 
     
     const newDisplay = function(){
@@ -315,7 +317,8 @@ const ScreenControl = function(){
     }
     
     
-    askNewGameButton.addEventListener("click", function(){initNewGame()})
+    askNewGameButton.addEventListener("click", function(){initNewGame()});
+    resetButton.addEventListener("click", function(){resetGame()});
     
 
     newPlayerData.addEventListener("submit", function(event){
@@ -332,6 +335,13 @@ const ScreenControl = function(){
         // newGameButton.classList.toggle("hidden");
         newPlayerData.classList.toggle("hidden");
     }
+
+
+    const resetGame = function(){
+        game.resetBoard();
+        newDisplay();
+    };
+
     
     const hidePanelShowScore = function(){
         newPlayerData.classList.toggle("hidden")
