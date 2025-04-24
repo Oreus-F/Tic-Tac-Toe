@@ -284,7 +284,7 @@ const ScreenControl = function(){
     const newPlayerData= document.querySelector("#newPlayerData");
 
     
-    const newBoard = function(){
+    const newDisplay = function(){
         
         const grid = container.children;
         if (grid.length === 9){
@@ -323,7 +323,7 @@ const ScreenControl = function(){
         
         game.getNewPlayer(event);
         hidePanelShowScore();
-        newBoard();
+        newDisplay();
         
     })
     
@@ -339,10 +339,10 @@ const ScreenControl = function(){
     
     
     return{
-        newBoard,
+        newDisplay,
     }
     
 }
 
 
-const game = ScreenControl().newBoard();
+const game = ScreenControl().newDisplay();
