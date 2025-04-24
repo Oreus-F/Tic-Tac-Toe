@@ -58,19 +58,23 @@ const Player = function(){
         
         let player = {
             name : name,
-            token : token
+            token : token,
+            score : 0
         };
         
         players.push(player);
     };
     
     
-    
     const getPlayers = (index) => players[index];
+
+
+    const getScore = (player) => player.score;
     
     return {
         addPlayer,
         getPlayers,
+        getScore
     }
 }
 
@@ -254,6 +258,8 @@ const GameControl = function(){
         
         if(check.win(temoin)){
             stopGame();
+            activePlayer.score += 1;
+            console.log(activePlayer.score);
             alert(`${activePlayer.name} victory !`)
         } else if(check.tie(temoin)){
             stopGame();
@@ -345,7 +351,7 @@ const ScreenControl = function(){
     
     const hidePanelShowScore = function(){
         newPlayerData.classList.toggle("hidden")
-    }
+    };
     
     
     return{
