@@ -67,21 +67,25 @@ const Player = function(){
     
     
     const getPlayers = (index) => players[index];
-
-
+    
+    
+    const addPoint = (player) => player.score += 1;
+    
+    
     const getScore = (player) => player.score;
     
     return {
         addPlayer,
         getPlayers,
-        getScore
+        addPoint,
+        getScore,
     }
 }
 
 
 const CheckVictory = function (){
     
-
+    
     const row = function(board) {
         let result;
         
@@ -101,7 +105,7 @@ const CheckVictory = function (){
                 };
             };
         }
-
+        
         return result;
     }
     
@@ -165,12 +169,12 @@ const CheckVictory = function (){
     
     
     const tie = function(board){
-
+        
         let temoin = 0;
-
+        
         for (let i=0; i<3; i++){
             for(let j=0; j<3; j++){
-
+                
                 if(board[i][j] === 0) continue;
                 else temoin += 1
                 
@@ -180,7 +184,7 @@ const CheckVictory = function (){
         if (temoin === 9) {return true;}
         
     };
-
+    
     
     return {
         win,
@@ -198,7 +202,8 @@ const GameControl = function(){
     
     const container = document.querySelector("#container");
     const newGameButton = document.querySelector("#askNewGame");
-
+    const resetButton = document.querySelector("#reset")
+    
     
     const getNewPlayer = function(event){
         
@@ -211,6 +216,8 @@ const GameControl = function(){
         
         
         activePlayer = player.getPlayers(0);
+
+        updateScore();
         
     }
     
@@ -222,11 +229,11 @@ const GameControl = function(){
     
     const getActivePlayer = () => activePlayer;
     
-
-    const resetBoard = function(){
-
-        const board = game.getBoard();
     
+    const resetBoard = function(){
+        
+        const board = game.getBoard();
+        
         for (let i = 0; i< 3; i++){
             board[i].slice(2, 3);
             board[i] = [];
@@ -234,21 +241,26 @@ const GameControl = function(){
                 board[i].push(Cell());
             }
         };
-    
     }
-
+    
     
     const stopGame = function(){
         
         const cell = container.children;
         
-        for ( let i = 0; i < cell.length; i++){
+        for (let i = 0; i < cell.length; i++){
             cell[i].setAttribute("disabled", true);
         }
         
         resetBoard();
-        newGameButton.classList.toggle("hidden")
+        updateScore();
+        newGameButton.classList.toggle("hidden");
+        resetButton.classList.toggle("hidden");
+        
     };
+
+
+    const winPoint = () => player.addPoint(activePlayer);
     
     
     const playRound = function(row, column){
@@ -259,18 +271,42 @@ const GameControl = function(){
         
         
         if(check.win(temoin)){
+
+            winPoint();
             stopGame();
-            activePlayer.score += 1;
-            console.log(activePlayer.score);
-            alert(`${activePlayer.name} victory !`)
+            alert(`${activePlayer.name} victory !`);
+            
         } else if(check.tie(temoin)){
+
             stopGame();
             alert("IT'S A TIE !");
+
         } else {
+
             switchPlayers();
+
         }
         
     };
+
+
+    
+    
+    const updateScore = function(){
+
+        const p1Score = document.querySelector("#p1Score");
+        const p2Score = document.querySelector("#p2Score");
+        
+        const p1 = p1Score.children;
+        const p2 = p2Score.children;
+        
+        p1[0].textContent = player.getPlayers(0).name;
+        p1[1].textContent = player.getPlayers(0).score;
+        
+        p2[0].textContent = player.getPlayers(1).name;
+        p2[1].textContent = player.getPlayers(1).score;
+        
+    }
     
     
     return{
@@ -292,7 +328,7 @@ const ScreenControl = function(){
     const newGameButton = document.querySelector("#askNewGame");
     const newPlayerData= document.querySelector("#newPlayerData");
     const resetButton = document.querySelector("#reset");
-
+    
     
     const newDisplay = function(){
         
@@ -306,7 +342,7 @@ const ScreenControl = function(){
             row.forEach((cell, index) => {
                 const button = document.createElement("button");
                 button.setAttribute("class", "cell");
-
+                
                 // A SUPPRIMER SI PAS UTILISER CSS
                 button.setAttribute("data-row", arg);
                 button.setAttribute("data-column", index);
@@ -314,7 +350,6 @@ const ScreenControl = function(){
                 button.addEventListener("click", function(){
                     game.playRound(arg, index);
                     button.textContent = cell.getValue();
-                    
                 }, {once:true})
                 
                 container.appendChild(button);
@@ -328,7 +363,7 @@ const ScreenControl = function(){
     newGameButton.addEventListener("click", function(){initNewGame()});
     resetButton.addEventListener("click", function(){resetGame()});
     
-
+    
     newPlayerData.addEventListener("submit", function(event){
         event.preventDefault();
         
@@ -338,22 +373,28 @@ const ScreenControl = function(){
         
     })
     
-
+    
     const initNewGame = function(){
+        if(resetButton.getAttribute("class") !== "hidden"){resetButton.classList.toggle("hidden")}
         newGameButton.classList.toggle("hidden");
         newPlayerData.classList.toggle("hidden");
     }
-
-
+    
+    
     const resetGame = function(){
+        newGameButton.classList.toggle("hidden");
+        resetButton.classList.toggle("hidden");
         game.resetBoard();
         newDisplay();
     };
-
+    
     
     const hidePanelShowScore = function(){
         newPlayerData.classList.toggle("hidden")
     };
+    
+    
+    
     
     const initDisplay = (function(){
         
@@ -363,7 +404,7 @@ const ScreenControl = function(){
                 const button = document.createElement("button");
                 button.setAttribute("class", "cell");
                 button.setAttribute("disabled", true)
-    
+                
                 // A SUPPRIMER SI PAS UTILISER CSS
                 button.setAttribute("data-row", arg);
                 button.setAttribute("data-column", index);
