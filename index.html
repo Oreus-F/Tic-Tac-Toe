@@ -10,26 +10,32 @@
 <body>
 
     <div class="infoArea">
-        <h3 id="playersTurn"></h3>
-
-        <div>
+        
+        <div id="scoreboard">
+            <h3 id="playersTurn"></h3>
             <div id="p1Score">
-                <p>Name</p>
-                <p>Score</p>
+                <p>Player One</p>
+                <p>0</p>
             </div>
             <div id="p2Score">
-                <p>Name</p>
-                <p>Score</p>
+                <p>Player Two</p>
+                <p>0</p>
             </div>
         </div>
 
     
         <form action="" id="newPlayerData" class="">
-            <label for="p1Name">Player one name</label>
-            <input type="text" value="Player one" name="p1Name" id="p1Name" required>
+            <div>
+                <label for="p1Name">Player one name</label>
+                <input type="text" value="Player one" name="p1Name" id="p1Name" required>
+                <span>X</span>
+            </div>
 
-            <label for="p2Name">Player two name</label>
-            <input type="text" value="Player two" name="p2Name" id="p2Name" required>
+            <div>
+                <label for="p2Name">Player two name</label>
+                <input type="text" value="Player two" name="p2Name" id="p2Name" required>
+                <span>O</span>
+            </div>
 
 
             <button id="startNewGame">Start</button>
