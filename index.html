@@ -8,53 +8,50 @@
 </head>
 
 <body>
-
+    
     <div class="infoArea">
         
-        <div id="scoreboard">
-            <h3 id="playersTurn"></h3>
-            <div id="p1Score">
-                <p>Player One</p>
-                <p>0</p>
-            </div>
-            <div id="p2Score">
-                <p>Player Two</p>
-                <p>0</p>
-            </div>
+        
+        <div id="p1Score">
+            <p>Player One</p>
+            <p>0</p>
         </div>
-
-    
-        <form action="" id="newPlayerData" class="">
+        <div id="p2Score">
+            <p>Player Two</p>
+            <p>0</p>
+        </div>
+        
+        
+        
+        <form action="" id="newPlayerData" class="hidden">
             <div>
-                <label for="p1Name">Player one name</label>
-                <input type="text" value="Player one" name="p1Name" id="p1Name" required>
+                <input type="text" value="Player one" name="p1Name" id="p1Name" maxlength="10" required>
                 <span>X</span>
             </div>
-
+            
             <div>
-                <label for="p2Name">Player two name</label>
-                <input type="text" value="Player two" name="p2Name" id="p2Name" required>
+                <input type="text" value="Player two" name="p2Name" id="p2Name" maxlength="10" required>
                 <span>O</span>
             </div>
-
-
-            <button id="startNewGame">Start</button>
+            
+            
+            <button id="startNewGame">START</button>
         </form>
-
-
-        <button id="reset" class="">Rematch</button>
-
-
-        <button id="askNewGame">New Game</button>
-
-
+        
+        
+        <button id="reset" class="hidden">REMATCH</button>
+        
+        
+        <button id="askNewGame">NEW GAME</button>
+        
+        
     </div>
-
+    
     <div class="playArea">
         <div id="container"></div>
     </div>
     
-
+    
     <script src="script.js"></script>
 </body>
 
