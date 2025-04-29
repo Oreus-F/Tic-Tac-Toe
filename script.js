@@ -247,7 +247,6 @@ const GameControl = function(){
     
 
     const rematch = function(){
-        console.log(firstPlayer)
         firstPlayer = firstPlayer === player.getPlayers(0) ? player.getPlayers(1) : player.getPlayers(0);
         activePlayer = firstPlayer;
         resetBoard()
