@@ -244,6 +244,13 @@ body{
 }
 
 
+.cell > span{
+    font-size: 9rem;
+    color: white;
+    font-family: "digital7";
+}
+
+
 .cell[data-column = "0"]{
     border-left: none;
 }
