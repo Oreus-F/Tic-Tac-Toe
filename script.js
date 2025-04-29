@@ -352,13 +352,16 @@ const ScreenControl = function(){
                 const button = document.createElement("button");
                 button.setAttribute("class", "cell");
                 
-                // A SUPPRIMER SI PAS UTILISER CSS
                 button.setAttribute("data-row", arg);
                 button.setAttribute("data-column", index);
                 
                 button.addEventListener("click", function(){
-                    game.playRound(arg, index);
                     const span = document.createElement("span");
+                    span.setAttribute("data-token", activePlayer.token)
+
+                    //playRound after setting data-token attribute
+                    game.playRound(arg, index);
+
                     span.textContent = cell.getValue();
                     button.appendChild(span);
                 }, {once:true})
