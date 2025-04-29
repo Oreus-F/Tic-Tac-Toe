@@ -237,3 +237,28 @@ body{
     width: 600px;
 
 }
+
+.cell{
+    background: none;
+    border: 2px solid var(--blue-glow-color);
+}
+
+
+.cell[data-column = "0"]{
+    border-left: none;
+}
+
+
+.cell[data-row = "0"]{
+    border-top: none;
+}
+
+
+.cell[data-column = "2"]{
+    border-right: none;
+}
+
+
+.cell[data-row = "2"]{
+    border-bottom: none;
+}
