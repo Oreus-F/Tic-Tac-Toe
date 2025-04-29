@@ -246,8 +246,17 @@ body{
 
 .cell > span{
     font-size: 9rem;
-    color: white;
     font-family: "digital7";
+}
+
+
+.cell > span[data-token = "X"]{
+    color: var(--blue-glow-color);
+}
+
+
+.cell > span[data-token = "O"]{
+    color: #FF10F0;
 }
 
 
