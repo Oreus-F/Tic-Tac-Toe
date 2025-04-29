@@ -358,7 +358,9 @@ const ScreenControl = function(){
                 
                 button.addEventListener("click", function(){
                     game.playRound(arg, index);
-                    button.textContent = cell.getValue();
+                    const span = document.createElement("span");
+                    span.textContent = cell.getValue();
+                    button.appendChild(span);
                 }, {once:true})
                 
                 container.appendChild(button);
