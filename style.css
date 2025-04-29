@@ -72,7 +72,7 @@ body{
 
 #askNewGame,
 #reset{
-    grid-column: 2/3;   
+    grid-column: 2/3;  
 }
 
 
@@ -187,7 +187,6 @@ body{
 
     padding: 15%;
 
-    text-shadow: 0 0 0.45em var(--blue-glow-color);
 }
 
 #p1Score > p:first-child,
@@ -201,10 +200,13 @@ body{
 
 #p1Score > p:last-child{
     color: var(--blue-glow-color);
+    text-shadow: 0 0 .125em hsl(0 0% 100% / .4),0 0 .45em var(--blue-glow-color);
 }
 
 #p2Score > p:last-child{
     color: #FF10F0;
+    text-shadow: 0 0 .125em hsl(0 0% 100% / .4),0 0 .45em #FF10F0;
+
 }
 
 
