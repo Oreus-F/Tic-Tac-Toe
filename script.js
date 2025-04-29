@@ -202,7 +202,8 @@ const GameControl = function(){
     
     const container = document.querySelector("#container");
     const newGameButton = document.querySelector("#askNewGame");
-    const resetButton = document.querySelector("#reset")
+    const resetButton = document.querySelector("#reset");
+
     
     
     const getNewPlayer = function(event){
@@ -216,6 +217,7 @@ const GameControl = function(){
         
         
         activePlayer = player.getPlayers(0);
+        firstPlayer = activePlayer;
 
         updateScore();
         
@@ -243,6 +245,14 @@ const GameControl = function(){
         };
     }
     
+
+    const rematch = function(){
+        console.log(firstPlayer)
+        firstPlayer = firstPlayer === player.getPlayers(0) ? player.getPlayers(1) : player.getPlayers(0);
+        activePlayer = firstPlayer;
+        resetBoard()
+    }    
+
     
     const stopGame = function(){
         
@@ -313,7 +323,7 @@ const GameControl = function(){
         playRound,
         getNewPlayer,
         getBoard: game.getBoard,
-        resetBoard,
+        rematch,
     }
     
 };
@@ -384,7 +394,7 @@ const ScreenControl = function(){
     const resetGame = function(){
         newGameButton.classList.toggle("hidden");
         resetButton.classList.toggle("hidden");
-        game.resetBoard();
+        game.rematch();
         newDisplay();
     };
     
