@@ -194,7 +194,7 @@ span.faulty-text{
 }
 
 
-#p1Score::after, #p2Score::after {
+.infoArea > div::after, .infoArea > div::after {
     content: "";
     z-index: -1;
     --angle : 0deg;
@@ -203,20 +203,15 @@ span.faulty-text{
     border-radius: .5rem;
 
     padding: 4px;
-
+    
+    background-image: conic-gradient(from var(--angle), transparent 50% , var(--border-color));
     position: absolute;
     top: 50%;
     left: 50%;
     translate: -50% -50%;
-}
-
-#p1Score::after {
-    background-image: conic-gradient(from var(--angle), transparent 50% , var(--blue-glow-color));
-}
-
-#p2Score::after{
-    background-image: conic-gradient(from var(--angle), transparent 50% , var(--pink-glow-color));
-
+    animation: 3s spin linear infinite;
+    opacity: 1;
+    transition: 400ms;
 }
 
 
@@ -232,11 +227,19 @@ span.faulty-text{
 }
 
 
-.infoArea > div.activeTurn::after{
-    animation: 3s spin linear infinite;
-
+#p1Score::after {
+    --border-color: var(--blue-glow-color);
 }
 
+
+#p2Score::after{
+    --border-color:var(--pink-glow-color);
+}
+
+.infoArea > div.waitingTurn::after{
+    opacity: 0;
+    transition: 400ms;
+}
 
 
 #p1Score > p:first-child,
