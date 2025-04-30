@@ -81,20 +81,29 @@ body{
 #startNewGame, #askNewGame, #reset{
     background: none;
     color: var(--main-additionnal-color);
-    border: var(--main-additionnal-color) .30em solid;
+    border: 4px solid var(--main-additionnal-color);
     
     letter-spacing: 1rem;
     padding: 1.5rem 0.15em;
     width: 320px;
     
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 600;
 
     border-radius: .45em;
 
-    box-shadow: inset 0 0 0.5em 0 var(--main-additionnal-color),
-    inset 0 0 0.5em 0 var(--main-additionnal-color);
+    box-shadow:
+    inset 0 0 .5em var(--main-additionnal-color),
+    0 0 .5em var(--main-additionnal-color);   
+
+
+    animation: border-flicker 2s linear infinite;
+    
+    
 }
+
+
+
 
 
 #newPlayerData.hidden{
@@ -285,4 +294,32 @@ body{
 
 .cell[data-row = "2"]{
     border-bottom: none;
+}
+
+
+@keyframes border-flicker {
+    0%{
+        opacity: 1;
+    };
+
+    2%{
+        opacity: .7;
+    }
+
+    6%{
+        opacity: .2;
+    }
+
+    12%{
+        opacity: .6;
+    }
+
+    70%{
+        opacity: .9;
+    }
+
+    100%{
+        opacity: 1;
+    }
+    
 }
