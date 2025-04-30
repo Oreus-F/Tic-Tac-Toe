@@ -1,6 +1,6 @@
 :root{
     --primary-color: #1a1a1a;
-    --info-color: #3333334b;
+    --info-color: #555555;
 
     --white-color: #ffffff;
 
@@ -83,12 +83,8 @@ body{
     color: var(--main-additionnal-color);
     border: 4px solid var(--main-additionnal-color);
     
-    letter-spacing: 1rem;
     padding: 1.5rem 0.15em;
     width: 320px;
-    
-    font-size: 1.3rem;
-    font-weight: 600;
 
     border-radius: .45em;
 
@@ -97,9 +93,16 @@ body{
     0 0 .5em var(--main-additionnal-color);   
 
 
-    animation: border-flicker 3s linear infinite;
+    animation: border-flicker 2s linear infinite;   
     
-    
+}
+
+span.faulty-text{
+    letter-spacing: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+
+    animation: text-flicker 2s linear infinite 
 }
 
 
@@ -146,7 +149,7 @@ body{
     box-shadow: inset 0 0 .45em 0 var(--main-additionnal-color);
 }
 
-#newPlayerData span{
+#newPlayerData > div span{
     font-size: 3.2rem;
     display: flex;
     align-items: center;
@@ -159,26 +162,80 @@ body{
 #p1Score, #p2Score {
     grid-row: 1/3;
 
-    height: 30vh;
+    width: 18vw;
     aspect-ratio: 1/1;
 
     border-radius: .5rem;
 
+    position: relative;
 }
+
 
 
 #p1Score{
     grid-column: 1/2;
-    box-shadow: 0 0 .8rem 0 var(--blue-glow-color) ;
+    /* box-shadow: 0 0 .8rem 0 var(--blue-glow-color) ; */
 
 }
 
 
 #p2Score{
     grid-column: 3/4;
-    box-shadow: 0 0 .8rem 0 var(--pink-glow-color);
+    /* box-shadow: 0 0 .8rem 0 var(--pink-glow-color); */
 
 }
+
+@property --angle{
+    syntax : "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+
+#p1Score::after, #p2Score::after {
+    content: "";
+    z-index: -1;
+    --angle : 0deg;
+    height: 100%;
+    width: 100%;
+    border-radius: .5rem;
+
+    background-image: conic-gradient(from var(--angle), transparent 50% , var(--blue-glow-color));
+    padding: 4px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+}
+
+#p1Score::after {
+    background-image: conic-gradient(from var(--angle), transparent 50% , var(--blue-glow-color));
+}
+
+#p2Score::after{
+    background-image: conic-gradient(from var(--angle), transparent 50% , var(--pink-glow-color));
+
+}
+
+
+@keyframes spin {
+    from {
+        --angle : 0deg
+    }
+
+    to {
+        --angle : 360deg;
+    }
+    
+}
+
+
+.infoArea > div.activeTurn::after{
+    animation: 3s spin linear infinite;
+
+}
+
 
 
 #p1Score > p:first-child,
@@ -189,7 +246,7 @@ body{
 
     align-items: center;
 
-    background-color:  #adadad57;
+    background-color:  var(--info-color);
 
     border-radius: .5rem .5rem 0 0;
 
@@ -201,9 +258,10 @@ body{
 
     font-size: 11vw;
 
-    height: 25vh;
-
     border-radius: 0 0 .5rem .5rem;
+
+    background: var(--primary-color);
+    height: 100%;
 }
 
 #p1Score > p:first-child,
@@ -296,7 +354,7 @@ body{
 
 @keyframes border-flicker {
     0%{
-        opacity: .4;
+        opacity: .1;
     };
 
     2%{
@@ -319,4 +377,49 @@ body{
         opacity: .7;
     }
     
-}
+};
+
+@keyframes text-flicker {
+    0% {
+      opacity: 0.1;
+    }
+  
+    2% {
+      opacity: 1;
+    }
+  
+    8% {
+      opacity: 0.1;
+    }
+  
+    9% {
+      opacity: 1;
+    }
+  
+    12% {
+      opacity: 0.1;
+    }
+    20% {
+      opacity: 1;
+    }
+    25% {
+      opacity: 0.3;
+    }
+    30% {
+      opacity: 1;
+    }
+  
+    70% {
+      opacity: 0.7;
+    }
+    72% {
+      opacity: 0.2;
+    }
+  
+    77% {
+      opacity: 0.9;
+    }
+    100% {
+      opacity: 0.9;
+    }
+  }
