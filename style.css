@@ -27,12 +27,11 @@
     src: url(fonts/Technology-Regular.woff2);
 }
 
-body{
-    height: 100vh;
-    width: auto;
+
+.main{
     display: grid;
     
-    max-height: 100%;
+    min-height: 100vh;
 
     background-color: var(--primary-color);
     color: var(--white-color);
@@ -47,14 +46,14 @@ body{
 
 
 .infoArea{
-    padding-top: 3rem;
+    padding-top: 2rem;
 
     display: grid;
 
     align-items: center;
     justify-items: center;
 
-    grid-template-columns: 1fr 1.5fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: repeat(2, 1fr);
 
     column-gap: 1rem;
@@ -169,22 +168,30 @@ span.faulty-text{
 
     position: relative;
     margin-bottom: -10rem;
+
+    animation: glow 4s alternate linear infinite;
 }
 
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 .8rem 0.2em var(--player-color);
+    }
+
+    to {
+        box-shadow: 0 0 0.8rem -0.2rem var(--player-color);
+    }
+}
 
 
 
 #p1Score{
     grid-column: 1/2;
-    box-shadow: 0 0 .8rem 0 var(--blue-glow-color) ;
-
 }
 
 
 #p2Score{
     grid-column: 3/4;
-    box-shadow: 0 0 .8rem 0 var(--pink-glow-color);
-
 }
 
 @property --angle{
@@ -197,14 +204,13 @@ span.faulty-text{
 .infoArea > div::after, .infoArea > div::after {
     content: "";
     z-index: -1;
-    --angle : 0deg;
     height: 100%;
     width: 100%;
     border-radius: .5rem;
 
     padding: 8px;
     
-    background-image: conic-gradient(from var(--angle), transparent 50% , var(--border-color));
+    background-image: conic-gradient(from var(--angle), transparent 50% , var(--player-color));
     position: absolute;
     top: 50%;
     left: 50%;
@@ -227,13 +233,13 @@ span.faulty-text{
 }
 
 
-#p1Score::after {
-    --border-color: var(--blue-glow-color);
+#p1Score::after, #p1Score {
+    --player-color: var(--blue-glow-color);
 }
 
 
-#p2Score::after{
-    --border-color:var(--pink-glow-color);
+#p2Score::after, #p2Score{
+    --player-color:var(--pink-glow-color);
 }
 
 .infoArea > div.waitingTurn::after{
