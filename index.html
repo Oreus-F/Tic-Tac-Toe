@@ -9,46 +9,48 @@
 
 <body>
     
-    <div class="infoArea">
+    <div class="main">
+        <div class="infoArea">
         
         
-        <div id="p1Score" class="waitingTurn">
-            <p>Player One</p>
-            <p>0</p>
-        </div>
-        <div id="p2Score" class="waitingTurn">
-            <p>Player Two</p>
-            <p>0</p>
-        </div>
-        
-        
-        
-        <form action="" id="newPlayerData" class="">
-            <div>
-                <input type="text" value="Player one" name="p1Name" id="p1Name" maxlength="10" required>
-                <span class="p1">X</span>
+            <div id="p1Score" class="waitingTurn">
+                <p>Player One</p>
+                <p>0</p>
             </div>
-            
-            <div>
-                <input type="text" value="Player two" name="p2Name" id="p2Name" maxlength="10" required>
-                <span class="p2">O</span>
+            <div id="p2Score" class="waitingTurn">
+                <p>Player Two</p>
+                <p>0</p>
             </div>
-            
-            
-            <button id="startNewGame"><span class="faulty-text">START</span></button>
-        </form>
         
         
-        <button id="reset" class="hidden"><span class="faulty-text">REMATCH</span></button>
+        
+            <form action="" id="newPlayerData" class="">
+                <div>
+                    <input type="text" value="Player one" name="p1Name" id="p1Name" maxlength="10" required>
+                    <span class="p1">X</span>
+                </div>
+        
+                <div>
+                    <input type="text" value="Player two" name="p2Name" id="p2Name" maxlength="10" required>
+                    <span class="p2">O</span>
+                </div>
         
         
-        <button id="askNewGame" class="hidden"><span class="faulty-text">NEW GAME</span></button>
+                <button id="startNewGame"><span class="faulty-text">START</span></button>
+            </form>
         
         
-    </div>
-    
-    <div class="playArea">
-        <div id="container"></div>
+            <button id="reset" class="hidden"><span class="faulty-text">REMATCH</span></button>
+        
+        
+            <button id="askNewGame" class="hidden"><span class="faulty-text">NEW GAME</span></button>
+        
+        
+        </div>
+        
+        <div class="playArea">
+            <div id="container"></div>
+        </div>
     </div>
     
     
