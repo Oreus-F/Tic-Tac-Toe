@@ -18,12 +18,13 @@
     list-style: none;
     font-size: 16px;
     box-sizing: border-box;
+    font-family: "technology";
 }
 
 
 @font-face {
-    font-family: "digital7";
-    src: url(fonts/digital-7.ttf);
+    font-family: "technology";
+    src: url(fonts/Technology-Regular.woff2);
 }
 
 body{
@@ -35,7 +36,6 @@ body{
 
     background-color: var(--primary-color);
     color: var(--white-color);
-    font-family: "digital7";
     
     grid-template-rows: 1fr 3fr;
 
@@ -118,7 +118,7 @@ body{
 #newPlayerData > div{
     display: grid;
     grid-template-columns: 90% 2fr;
-    gap: 0.5rem;
+    gap: 0.7rem;
 
     align-content: center;
 }
@@ -127,7 +127,6 @@ body{
 
     color: var(--main-additionnal-color);
 
-    font-family: "digital7";
     background: none;
 
     border: var(--main-additionnal-color) .1em solid;
@@ -145,9 +144,8 @@ body{
 
 #newPlayerData span{
     font-size: 3.2rem;
-    padding-top: .33rem;
-    padding-left: .5rem;
-
+    display: flex;
+    align-items: center;
 }
 
 
@@ -249,7 +247,6 @@ body{
 
 .cell > span{
     font-size: 9rem;
-    font-family: "digital7";
 }
 
 
