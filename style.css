@@ -97,13 +97,19 @@ body{
     0 0 .5em var(--main-additionnal-color);   
 
 
-    animation: border-flicker 2s linear infinite;
+    animation: border-flicker 3s linear infinite;
     
     
 }
 
 
-
+#startNewGame::before,
+#askNewGame::before{
+    content: "";
+    opacity: .7;
+    filter: blur(1em);
+    transform: translateY(120%) rotateX(95deg) scale(1, 0.35);
+}
 
 
 #newPlayerData.hidden{
@@ -299,14 +305,14 @@ body{
 
 @keyframes border-flicker {
     0%{
-        opacity: 1;
+        opacity: .4;
     };
 
     2%{
         opacity: .7;
     }
 
-    6%{
+    4%{
         opacity: .2;
     }
 
@@ -315,11 +321,11 @@ body{
     }
 
     70%{
-        opacity: .9;
+        opacity: 1;
     }
 
     100%{
-        opacity: 1;
+        opacity: .7;
     }
     
 }
