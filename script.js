@@ -203,7 +203,9 @@ const GameControl = function(){
     const container = document.querySelector("#container");
     const newGameButton = document.querySelector("#askNewGame");
     const resetButton = document.querySelector("#reset");
-
+    
+    const p1Score = document.querySelector("#p1Score");
+    const p2Score = document.querySelector("#p2Score");
     
     
     const getNewPlayer = function(event){
@@ -218,6 +220,7 @@ const GameControl = function(){
         
         activePlayer = player.getPlayers(0);
         firstPlayer = activePlayer;
+        p1Score.classList.toggle("waitingTurn");
 
         updateScore();
         
@@ -249,6 +252,7 @@ const GameControl = function(){
     const rematch = function(){
         firstPlayer = firstPlayer === player.getPlayers(0) ? player.getPlayers(1) : player.getPlayers(0);
         activePlayer = firstPlayer;
+        firstPlayer === player.getPlayers(0) ? p1Score.classList.toggle("waitingTurn") : p2Score.classList.toggle("waitingTurn");
         resetBoard()
     }    
 
@@ -263,6 +267,9 @@ const GameControl = function(){
         
         resetBoard();
         updateScore();
+        
+        p1Score.getAttribute("class") === "waitingTurn" ? p2Score.classList.toggle("waitingTurn") : p1Score.classList.toggle("waitingTurn");
+
         newGameButton.classList.toggle("hidden");
         resetButton.classList.toggle("hidden");
         
@@ -293,19 +300,14 @@ const GameControl = function(){
         } else {
 
             switchPlayers();
+            changeDisplay();
 
         }
         
     };
 
-
     
-    
-    const updateScore = function(){
-
-        const p1Score = document.querySelector("#p1Score");
-        const p2Score = document.querySelector("#p2Score");
-        
+    const updateScore = function(){        
         const p1 = p1Score.children;
         const p2 = p2Score.children;
         
@@ -315,6 +317,12 @@ const GameControl = function(){
         p2[0].textContent = player.getPlayers(1).name;
         p2[1].textContent = player.getPlayers(1).score;
         
+    }
+
+
+    const changeDisplay = function(){
+        p1Score.classList.toggle("waitingTurn");
+        p2Score.classList.toggle("waitingTurn");
     }
     
     
