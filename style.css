@@ -4,7 +4,11 @@
 
     --white-color: #ffffff;
 
+    --main-additionnal-color: #eFFF61;
+
     --blue-glow-color: #61eFFF;
+    --pink-glow-color:  #FF61EF;
+
 }
 
 
@@ -78,8 +82,8 @@ body{
 
 #startNewGame, #askNewGame, #reset{
     background: none;
-    color: var(--blue-glow-color);
-    border: var(--blue-glow-color) .30em solid;
+    color: var(--main-additionnal-color);
+    border: var(--main-additionnal-color) .30em solid;
     
     letter-spacing: 1rem;
     padding: 1.5rem 0.15em;
@@ -90,8 +94,8 @@ body{
 
     border-radius: .45em;
 
-    box-shadow: inset 0 0 0.5em 0 var(--blue-glow-color),
-    inset 0 0 0.5em 0 var(--blue-glow-color);
+    box-shadow: inset 0 0 0.5em 0 var(--main-additionnal-color),
+    inset 0 0 0.5em 0 var(--main-additionnal-color);
 }
 
 
@@ -121,12 +125,12 @@ body{
 
 #newPlayerData input {
 
-    color: var(--white-color);
+    color: var(--main-additionnal-color);
 
     font-family: "digital7";
     background: none;
 
-    border: var(--white-color) .1em solid;
+    border: var(--main-additionnal-color) .1em solid;
     border-radius: .25em;
 
     font-size: 1.5rem;
@@ -136,13 +140,14 @@ body{
 
     padding-left: 1.5rem;
 
-    box-shadow: inset 0 0 .45em 0;
+    box-shadow: inset 0 0 .45em 0 var(--main-additionnal-color);
 }
 
 #newPlayerData span{
-    font-size: 2.5rem;
-    padding-top: .5rem;
+    font-size: 3.2rem;
+    padding-top: .33rem;
     padding-left: .5rem;
+
 }
 
 
@@ -207,8 +212,8 @@ body{
 }
 
 #p2Score > p:last-child{
-    color: #FF10F0;
-    text-shadow: 0 0 .125em hsl(0 0% 100% / .4),0 0 .45em #FF10F0;
+    color: var(--pink-glow-color);
+    text-shadow: 0 0 .125em hsl(0 0% 100% / .4),0 0 .45em var(--pink-glow-color);
 
 }
 
@@ -238,7 +243,7 @@ body{
 
 .cell{
     background: none;
-    border: 2px solid var(--blue-glow-color);
+    border: 2px solid var(--main-additionnal-color);
 }
 
 
@@ -248,13 +253,15 @@ body{
 }
 
 
-.cell > span[data-token = "X"]{
+.cell > span[data-token = "X"],
+#newPlayerData span.p1{
     color: var(--blue-glow-color);
 }
 
 
-.cell > span[data-token = "O"]{
-    color: #FF10F0;
+.cell > span[data-token = "O"],
+#newPlayerData span.p2{
+    color: var(--pink-glow-color);
 
 }
 
