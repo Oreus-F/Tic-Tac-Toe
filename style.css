@@ -4,7 +4,7 @@
 
     --white-color: #ffffff;
 
-    --main-additionnal-color: #eFFF61;
+    --main-additionnal-color: #efff61e1;
 
     --blue-glow-color: #61eFFF;
     --pink-glow-color:  #FF61EF;
@@ -58,8 +58,6 @@ body{
     grid-template-rows: repeat(2, 1fr);
 
     column-gap: 1rem;
-
-   background-color: var(--info-color); 
 
 }
 
@@ -157,27 +155,37 @@ body{
 
     height: 30vh;
     aspect-ratio: 1/1;
+
+    border-radius: .5rem;
+
 }
 
 
 #p1Score{
     grid-column: 1/2;
+    box-shadow: 0 0 .8rem 0 var(--blue-glow-color) ;
+
 }
 
 
 #p2Score{
     grid-column: 3/4;
+    box-shadow: 0 0 .8rem 0 var(--pink-glow-color);
+
 }
 
 
 #p1Score > p:first-child,
 #p2Score > p:first-child{
     font-size: clamp(1rem, 2vw , 3rem);
+    letter-spacing: .5rem;
     height: clamp(3rem, 4vw, 6rem);
 
     align-items: center;
 
     background-color:  #adadad57;
+
+    border-radius: .5rem .5rem 0 0;
 
 }
 
@@ -185,14 +193,11 @@ body{
 #p1Score > p:last-child,
 #p2Score > p:last-child{
 
-    font-size: 9vw;
+    font-size: 11vw;
 
-    height: 22vh;
+    height: 25vh;
 
-    background-color: var(--primary-color);
-
-    padding: 15%;
-
+    border-radius: 0 0 .5rem .5rem;
 }
 
 #p1Score > p:first-child,
@@ -201,6 +206,7 @@ body{
 #p2Score > p:last-child{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 
@@ -233,7 +239,6 @@ body{
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
 
-    border: 1px solid black;
     height: 600px;
     width: 600px;
 
