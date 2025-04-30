@@ -103,15 +103,6 @@ body{
 }
 
 
-#startNewGame::before,
-#askNewGame::before{
-    content: "";
-    opacity: .7;
-    filter: blur(1em);
-    transform: translateY(120%) rotateX(95deg) scale(1, 0.35);
-}
-
-
 #newPlayerData.hidden{
     display: none;
 }
