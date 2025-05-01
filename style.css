@@ -94,7 +94,7 @@ body{
     border: 4px solid var(--main-additionnal-color);
     
     padding: 1.5rem 0.15em;
-    width: 320px;
+    width: 25rem;
 
     border-radius: .45em;
 
@@ -358,8 +358,8 @@ span.faulty-text{
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
 
-    height: 600px;
-    width: 600px;
+    height: 35rem;
+    width: 35rem;
 
 }
 
@@ -420,7 +420,7 @@ span.faulty-text{
 
 /* TEST CLIP-PATH */
 
-.cell[data-column = "0"][data-row = "0"]{
+/* .cell[data-column = "0"][data-row = "0"]{
     clip-path: inset(0.6rem -0.6rem -0.6rem 0.6rem);
 }
 
@@ -452,7 +452,7 @@ span.faulty-text{
 
 .cell[data-column = "2"][data-row = "2"]{
     clip-path: inset(-.6rem .6rem .6rem -.6rem);
-}
+} */
 
 /* FIN TEST CLIP-PATH */
 
