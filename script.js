@@ -106,13 +106,11 @@ const CheckVictory = function (){
 
                         board[0].map((_, index1) => board.map((column, index2) => {
                             if((index1 === i && index2 === j) || (index1 === i && index2 === j+1) || (index1 === i && index2 === j+2)){
-                                return board[index1][index2] = "win";
-                            } return column;
+                                return board[index1][index2] = "win";};
                         }))
 
 
-                        let winTemoin = board.flat();
-                        result.temoin = winTemoin;
+                        result.temoin = board.flat();
 
                     };
                 };
@@ -145,9 +143,7 @@ const CheckVictory = function (){
                                 return board[index1][index2] = "win";};
                         }))
 
-
-                        let winTemoin = board.flat();
-                        result.temoin = winTemoin;
+                        result.temoin = board.flat();
 
 
                         break;
@@ -161,7 +157,7 @@ const CheckVictory = function (){
     
     
     const diag = function(board){
-        let result;
+        result = {};
         
         
         if (board[0][0] !== 0){
@@ -170,7 +166,16 @@ const CheckVictory = function (){
             const check2 = board[2][2];
             
             if (check1 === value && check2 === value){
-                result = true;
+                result.win = true;
+
+
+                board[0].map((_, index1) => board.map((column, index2) => {
+                    if((index1 === 0 && index2 === 0) || (index1 === 1 && index2 === 1) || (index1 === 2 && index2 === 2)){
+                        return board[index1][index2] = "win";};
+                }))
+
+                result.temoin = board.flat();
+
             };
         };
         
@@ -180,8 +185,17 @@ const CheckVictory = function (){
             const check2 = board[2][0];
             
             if (check1 === value && check2 === value){
-                result = true;
+                result.win = true;
+
+
+                board[0].map((_, index1) => board.map((column, index2) => {
+                    if((index1 === 0 && index2 === 2) || (index1 === 1 && index2 === 1) || (index1 === 2 && index2 === 0)){
+                        return board[index1][index2] = "win";};
+                }))
+
+                result.temoin = board.flat();
             };
+
         };
         
         return result;
@@ -189,7 +203,7 @@ const CheckVictory = function (){
     
     
     const win = function(board){
-        if (row(board).win === true || column(board).win === true /* || diag(board).win === true */) {return result;}
+        if (row(board).win === true || column(board).win === true || diag(board).win === true) {return result;}
     }
     
     
@@ -210,7 +224,6 @@ const CheckVictory = function (){
         result.temoin = board.flat();
         
         if (temoin === 9) {result.tie = true;}
-        console.log(result)
         return result;
         
     };
@@ -330,7 +343,9 @@ const GameControl = function(){
         if(check.win(temoin)){
 
             let result = check.win(temoin);
+            console.log(result)
             result = result.temoin;
+            console.log(result)
             winPoint();
             stopGame(result);
             
