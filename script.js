@@ -181,8 +181,9 @@ const CheckVictory = function (){
     }
     
     
-    const tie = function(board){
+    const tieVerif = function(board){
         
+        let result = {};
         let temoin = 0;
         
         for (let i=0; i<3; i++){
@@ -193,9 +194,17 @@ const CheckVictory = function (){
                 
             };
         }
+
+        result.temoin = board.flat();
         
-        if (temoin === 9) {return true;}
+        if (temoin === 9) {result.tie = true;}
+        console.log(result)
+        return result;
         
+    };
+
+    const tie = function(board){
+        if (tieVerif(board).tie === true) return result;
     };
     
     
@@ -271,13 +280,14 @@ const GameControl = function(){
 
     
     const stopGame = function(temoin){
+        temoin = temoin || game.getBoardWithValue();
         
         const cell = container.children;
         
         for (let i = 0; i < cell.length; i++){
             cell[i].setAttribute("disabled", true);
-            if(temoin[i] === "win"){continue
-
+            if(temoin[i] === "win"){
+                continue;
             } else {cell[i].classList.toggle("end")};
         }
         
@@ -313,16 +323,19 @@ const GameControl = function(){
             stopGame(result);
             
         } 
-        // else if(check.tie(temoin)){
+        else if(check.tie(temoin)){
 
-        //     stopGame();
+            let result = check.tie(temoin);
+            result = result.temoin;
 
-        // } else {
+            stopGame(result);
 
-        //     switchPlayers();
-        //     changeDisplay();
+        } else {
 
-        // }
+            switchPlayers();
+            changeDisplay();
+
+        }
         
     };
 
