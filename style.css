@@ -29,10 +29,19 @@
 }
 
 
+body{
+    position: relative;
+}
+
+
 .main{
     display: grid;
+
+    position: absolute;
     
     min-height: 100vh;
+    width: 100%;
+    z-index: -2;
 
     background-color: var(--primary-color);
     color: var(--white-color);
@@ -212,14 +221,12 @@ span.faulty-text{
 
     padding: 8px;
     
-    background-image: conic-gradient(from var(--angle), transparent 50% , var(--player-color));
     position: absolute;
     top: 50%;
     left: 50%;
     translate: -50% -50%;
-    animation: 3s spin linear infinite;
-    opacity: 1;
-    transition: 400ms;
+    opacity: 0;
+    transition: 800ms;
 }
 
 
@@ -227,15 +234,17 @@ span.faulty-text{
     from {
         --angle : 0deg
     }
-
+    
     to {
         --angle : 360deg;
     }
     
 }
 
-.infoArea > div.waitingTurn::after{
-    opacity: 0;
+.infoArea > div.activeTurn::after{
+    background-image: conic-gradient(from var(--angle), transparent 50% , var(--player-color));
+    animation: 4s spin linear infinite;
+    opacity: 1;
     transition: 400ms;
 }
 
@@ -319,10 +328,13 @@ span.faulty-text{
 
 
 .cell > span{
-    font-size: 9rem;
-    
+    font-size: 9rem;   
 }
 
+
+.cell.end > span{
+    opacity: .5;
+}
 
 
 .cell > span,
