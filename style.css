@@ -6,6 +6,7 @@
 
     --main-additionnal-color: #efff61e1;
 
+
     --blue-glow-color: #61eFFF;
     --pink-glow-color:  #FF61EF;
 
@@ -204,6 +205,7 @@ span.faulty-text{
 .infoArea > div::after, .infoArea > div::after {
     content: "";
     z-index: -1;
+    --angle: 0deg;
     height: 100%;
     width: 100%;
     border-radius: .5rem;
@@ -230,16 +232,6 @@ span.faulty-text{
         --angle : 360deg;
     }
     
-}
-
-
-#p1Score::after, #p1Score {
-    --player-color: var(--blue-glow-color);
-}
-
-
-#p2Score::after, #p2Score{
-    --player-color:var(--pink-glow-color);
 }
 
 .infoArea > div.waitingTurn::after{
@@ -321,24 +313,41 @@ span.faulty-text{
 .cell{
     background: none;
     border: 2px solid var(--main-additionnal-color);
+    box-shadow: inset 0 0 .5rem var(--main-additionnal-color);
+
 }
 
 
 .cell > span{
     font-size: 9rem;
+    
+}
+
+
+
+.cell > span,
+#newPlayerData span {
+    text-shadow: -1px -1px .125em hsl(0 0% 100% / .4),0 0 .45em var(--player-color);
+
 }
 
 
 .cell > span[data-token = "X"],
-#newPlayerData span.p1{
-    color: var(--blue-glow-color);
+#newPlayerData span.p1,
+#p1Score::after,
+#p1Score {
+    --player-color: var(--blue-glow-color);
+    color: var(--player-color);
+    
 }
 
 
 .cell > span[data-token = "O"],
-#newPlayerData span.p2{
-    color: var(--pink-glow-color);
-
+#newPlayerData span.p2,
+#p2Score::after,
+#p2Score{
+    --player-color : var(--pink-glow-color);
+    color: var(--player-color);
 }
 
 
@@ -346,6 +355,43 @@ span.faulty-text{
     border-left: none;
 }
 
+/* TEST CLIP-PATH */
+
+.cell[data-column = "0"][data-row = "0"]{
+    clip-path: inset(0.5rem -0.5rem -0.5rem 0.5rem);
+}
+
+.cell[data-column = "0"][data-row = "1"]{
+    clip-path: inset(-0.5rem -.5rem -.5rem .5rem);
+}
+
+
+.cell[data-column = "0"][data-row = "2"]{
+    clip-path: inset(-.5rem -.5rem .5rem .5rem);
+}
+
+
+.cell[data-column = "1"][data-row = "0"]{
+    clip-path: inset(.5rem -.5rem -.5rem -.5rem);
+}
+
+.cell[data-column = "1"][data-row = "2"]{
+    clip-path: inset(-.5rem -.5rem .5rem -.5rem);
+}
+
+.cell[data-column = "2"][data-row = "0"]{
+    clip-path: inset(.5rem .5rem -.5rem -.5rem);
+}
+
+.cell[data-column = "2"][data-row = "1"]{
+    clip-path: inset(-.5rem .5rem -.5rem -.5rem);
+}
+
+.cell[data-column = "2"][data-row = "2"]{
+    clip-path: inset(-.5rem .5rem .5rem -.5rem);
+}
+
+/* FIN TEST CLIP-PATH */
 
 .cell[data-row = "0"]{
     border-top: none;
@@ -433,3 +479,5 @@ span.faulty-text{
       opacity: 0.9;
     }
   }
+
+
