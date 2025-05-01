@@ -85,12 +85,14 @@ const Player = function(){
 
 const CheckVictory = function (){
     
+
+    let result = {};
     
     const row = function(board) {
-        let result;
+        result = {};
         
         for (let i = 0; i < 3; i++){
-            if (result) break;
+            if (result.win) break;
             
             for (let j = 0; j < 1; j++){
                 
@@ -100,7 +102,18 @@ const CheckVictory = function (){
                     const check2 = board[i][j+2];
                     
                     if (check1 === value && check2 === value){
-                        result = true;
+                        result.win = true;
+
+                        board[0].map((_, index1) => board.map((column, index2) => {
+                            if((index1 === i && index2 === j) || (index1 === i && index2 === j+1) || (index1 === i && index2 === j+2)){
+                                return board[index1][index2] = "win";
+                            } return column;
+                        }))
+
+
+                        let winTemoin = board.flat();
+                        result.temoin = winTemoin;
+
                     };
                 };
             };
@@ -111,7 +124,7 @@ const CheckVictory = function (){
     
     
     const column = function(board){
-        let result;
+        result;
         
         for (let i = 0; i < 1; i++){
             
@@ -164,7 +177,7 @@ const CheckVictory = function (){
     
     
     const win = function(board){
-        if (row(board) === true || column(board) === true || diag(board) === true) {return true;}
+        if (row(board).win === true /* || column(board) === true || diag(board) === true */) {return result;}
     }
     
     
@@ -220,7 +233,7 @@ const GameControl = function(){
         
         activePlayer = player.getPlayers(0);
         firstPlayer = activePlayer;
-        p1Score.classList.toggle("waitingTurn");
+        p1Score.classList.toggle("activeTurn");
 
         updateScore();
         
@@ -252,23 +265,28 @@ const GameControl = function(){
     const rematch = function(){
         firstPlayer = firstPlayer === player.getPlayers(0) ? player.getPlayers(1) : player.getPlayers(0);
         activePlayer = firstPlayer;
-        firstPlayer === player.getPlayers(0) ? p1Score.classList.toggle("waitingTurn") : p2Score.classList.toggle("waitingTurn");
+        firstPlayer === player.getPlayers(0) ? p1Score.classList.toggle("activeTurn") : p2Score.classList.toggle("activeTurn");
         resetBoard()
     }    
 
     
-    const stopGame = function(){
+    const stopGame = function(temoin){
         
         const cell = container.children;
         
         for (let i = 0; i < cell.length; i++){
             cell[i].setAttribute("disabled", true);
+            if(temoin[i] === "win"){continue
+
+            } else {cell[i].classList.toggle("end")};
         }
         
+        
+
         resetBoard();
         updateScore();
         
-        p1Score.getAttribute("class") === "waitingTurn" ? p2Score.classList.toggle("waitingTurn") : p1Score.classList.toggle("waitingTurn");
+        p1Score.getAttribute("class") === "activeTurn" ? p1Score.classList.toggle("activeTurn") : p2Score.classList.toggle("activeTurn");
 
         newGameButton.classList.toggle("hidden");
         resetButton.classList.toggle("hidden");
@@ -285,24 +303,26 @@ const GameControl = function(){
         
         const temoin = game.getBoardWithValue();
         
+       
         
         if(check.win(temoin)){
 
+            let result = check.win(temoin);
+            result = result.temoin;
             winPoint();
-            stopGame();
-            alert(`${activePlayer.name} victory !`);
+            stopGame(result);
             
-        } else if(check.tie(temoin)){
+        } 
+        // else if(check.tie(temoin)){
 
-            stopGame();
-            alert("IT'S A TIE !");
+        //     stopGame();
 
-        } else {
+        // } else {
 
-            switchPlayers();
-            changeDisplay();
+        //     switchPlayers();
+        //     changeDisplay();
 
-        }
+        // }
         
     };
 
@@ -321,8 +341,8 @@ const GameControl = function(){
 
 
     const changeDisplay = function(){
-        p1Score.classList.toggle("waitingTurn");
-        p2Score.classList.toggle("waitingTurn");
+        p1Score.classList.toggle("activeTurn");
+        p2Score.classList.toggle("activeTurn");
     }
     
     
