@@ -177,7 +177,7 @@ span.faulty-text{
 
 #newPlayerData > div{
     display: grid;
-    grid-template-columns: 90% 2fr;
+    grid-template-columns: 90% 1fr;
     gap: 0.7rem;
 
     align-content: center;
@@ -418,43 +418,6 @@ span.faulty-text{
     border-left: none;
 }
 
-/* TEST CLIP-PATH */
-
-/* .cell[data-column = "0"][data-row = "0"]{
-    clip-path: inset(0.6rem -0.6rem -0.6rem 0.6rem);
-}
-
-.cell[data-column = "0"][data-row = "1"]{
-    clip-path: inset(-0.6rem -.6rem -.6rem .6rem);
-}
-
-
-.cell[data-column = "0"][data-row = "2"]{
-    clip-path: inset(-.6rem -.6rem .6rem .6rem);
-}
-
-
-.cell[data-column = "1"][data-row = "0"]{
-    clip-path: inset(.6rem -.6rem -.6rem -.6rem);
-}
-
-.cell[data-column = "1"][data-row = "2"]{
-    clip-path: inset(-.6rem -.6rem .6rem -.6rem);
-}
-
-.cell[data-column = "2"][data-row = "0"]{
-    clip-path: inset(.6rem .6rem -.6rem -.6rem);
-}
-
-.cell[data-column = "2"][data-row = "1"]{
-    clip-path: inset(-.6rem .6rem -.6rem -.6rem);
-}
-
-.cell[data-column = "2"][data-row = "2"]{
-    clip-path: inset(-.6rem .6rem .6rem -.6rem);
-} */
-
-/* FIN TEST CLIP-PATH */
 
 .cell[data-row = "0"]{
     border-top: none;
