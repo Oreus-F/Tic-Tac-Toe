@@ -312,7 +312,7 @@ const GameControl = function(){
         for (let i = 0; i < cell.length; i++){
             cell[i].setAttribute("disabled", true);
             if(temoin[i] === "win"){
-                continue;
+                cell[i].classList.toggle("win")
             } else {cell[i].classList.toggle("end")};
         }
         
