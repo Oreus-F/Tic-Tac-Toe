@@ -124,12 +124,12 @@ const CheckVictory = function (){
     
     
     const column = function(board){
-        result;
+        result = {};
         
         for (let i = 0; i < 1; i++){
             
             for (let j = 0; j < 3; j++){
-                if (result) break;
+                if (result.win) break;
                 
                 if (board[i][j] !== 0){
                     const value = board[i][j];
@@ -137,7 +137,19 @@ const CheckVictory = function (){
                     const check2 = board[i+2][j];
                     
                     if (check1 === value && check2 === value){
-                        result = true;
+                        result.win = true;
+
+
+                        board[0].map((_, index1) => board.map((column, index2) => {
+                            if((index1 === i && index2 === j) || (index1 === i+1 && index2 === j) || (index1 === i+2 && index2 === j)){
+                                return board[index1][index2] = "win";};
+                        }))
+
+
+                        let winTemoin = board.flat();
+                        result.temoin = winTemoin;
+
+
                         break;
                     };
                 };
@@ -177,7 +189,7 @@ const CheckVictory = function (){
     
     
     const win = function(board){
-        if (row(board).win === true /* || column(board) === true || diag(board) === true */) {return result;}
+        if (row(board).win === true || column(board).win === true /* || diag(board).win === true */) {return result;}
     }
     
     
