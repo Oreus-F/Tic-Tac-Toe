@@ -102,7 +102,7 @@ body{
     0 0 .5em var(--main-additionnal-color);   
 
 
-    animation: border-flicker 2s linear infinite;   
+    animation: border-flicker 3s linear infinite;   
     
 }
 
@@ -111,7 +111,7 @@ span.faulty-text{
     font-size: 1.3rem;
     font-weight: 600;
 
-    animation: text-flicker 2s linear infinite 
+    animation: text-flicker 3s linear infinite 
 }
 
 
@@ -334,6 +334,13 @@ span.faulty-text{
 
 .cell.end > span{
     opacity: .3;
+    transition: 2s;
+}
+
+
+.cell.win > span {
+    animation: slow-glow 5s linear infinite 
+
 }
 
 
@@ -370,37 +377,37 @@ span.faulty-text{
 /* TEST CLIP-PATH */
 
 .cell[data-column = "0"][data-row = "0"]{
-    clip-path: inset(0.5rem -0.5rem -0.5rem 0.5rem);
+    clip-path: inset(0.6rem -0.6rem -0.6rem 0.6rem);
 }
 
 .cell[data-column = "0"][data-row = "1"]{
-    clip-path: inset(-0.5rem -.5rem -.5rem .5rem);
+    clip-path: inset(-0.6rem -.6rem -.6rem .6rem);
 }
 
 
 .cell[data-column = "0"][data-row = "2"]{
-    clip-path: inset(-.5rem -.5rem .5rem .5rem);
+    clip-path: inset(-.6rem -.6rem .6rem .6rem);
 }
 
 
 .cell[data-column = "1"][data-row = "0"]{
-    clip-path: inset(.5rem -.5rem -.5rem -.5rem);
+    clip-path: inset(.6rem -.6rem -.6rem -.6rem);
 }
 
 .cell[data-column = "1"][data-row = "2"]{
-    clip-path: inset(-.5rem -.5rem .5rem -.5rem);
+    clip-path: inset(-.6rem -.6rem .6rem -.6rem);
 }
 
 .cell[data-column = "2"][data-row = "0"]{
-    clip-path: inset(.5rem .5rem -.5rem -.5rem);
+    clip-path: inset(.6rem .6rem -.6rem -.6rem);
 }
 
 .cell[data-column = "2"][data-row = "1"]{
-    clip-path: inset(-.5rem .5rem -.5rem -.5rem);
+    clip-path: inset(-.6rem .6rem -.6rem -.6rem);
 }
 
 .cell[data-column = "2"][data-row = "2"]{
-    clip-path: inset(-.5rem .5rem .5rem -.5rem);
+    clip-path: inset(-.6rem .6rem .6rem -.6rem);
 }
 
 /* FIN TEST CLIP-PATH */
@@ -445,9 +452,10 @@ span.faulty-text{
         opacity: .7;
     }
     
-};
+}
 
 @keyframes text-flicker {
+
     0% {
       opacity: 0.1;
     }
@@ -467,12 +475,15 @@ span.faulty-text{
     12% {
       opacity: 0.1;
     }
+
     20% {
       opacity: 1;
     }
+
     25% {
       opacity: 0.3;
     }
+
     30% {
       opacity: 1;
     }
@@ -480,6 +491,7 @@ span.faulty-text{
     70% {
       opacity: 0.7;
     }
+
     72% {
       opacity: 0.2;
     }
@@ -487,9 +499,52 @@ span.faulty-text{
     77% {
       opacity: 0.9;
     }
+
     100% {
       opacity: 0.9;
     }
-  }
+}
 
+
+@keyframes slow-glow {
+    0%{
+        opacity: 1;
+    }
+
+    20%{
+        opacity: .7;
+    }
+
+    40%{
+        opacity: .9;
+    }
+
+    45%{
+        opacity: .3;
+    }
+
+    52%{
+        opacity: .8;
+    }
+
+    66%{
+        opacity: 1;
+    }
+
+    70%{
+        opacity: .8;
+    }
+
+    75%{
+        opacity: .4;
+    }
+
+    78%{
+        opacity: .7;
+    }
+
+    100%{
+        opacity: 1;
+    }
+}
 
