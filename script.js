@@ -181,7 +181,7 @@ const CheckVictory = function (){
     }
     
     
-    const tieVerif = function(board){
+    const tieCount = function(board){
         
         let result = {};
         let temoin = 0;
@@ -204,7 +204,7 @@ const CheckVictory = function (){
     };
 
     const tie = function(board){
-        if (tieVerif(board).tie === true) return result;
+        if (tieCount(board).tie === true) return result;
     };
     
     
@@ -281,7 +281,7 @@ const GameControl = function(){
     
     const stopGame = function(temoin){
         temoin = temoin || game.getBoardWithValue();
-        
+
         const cell = container.children;
         
         for (let i = 0; i < cell.length; i++){
