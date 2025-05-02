@@ -226,8 +226,8 @@ span.faulty-text{
     border-radius: .5rem;
     position: absolute;
     margin-top: 16rem;
-    height: 20rem;
-    width: 65%;
+    height: clamp(16rem, 18vw, 19rem);
+    width: clamp(13rem, 15vw, 16rem);
 
     background-color: var(--primary-color);
 
@@ -306,7 +306,7 @@ span.faulty-text{
 #p1Score > p:first-child,
 #p2Score > p:first-child{
     flex: 1;
-    font-size: 2.5rem;
+    font-size: clamp(1rem, 1.5vw, 1.9rem);
 
     padding: 1rem;
     letter-spacing: .5rem;
@@ -324,7 +324,7 @@ span.faulty-text{
 #p2Score > p:last-child{
     flex: 6;
 
-    font-size: 10rem;
+    font-size: 9rem;
 
     border-radius: 0 0 .5rem .5rem;
 
@@ -364,7 +364,6 @@ span.faulty-text{
 
     justify-content: center;
     align-items: center;
-
 
 }
 
