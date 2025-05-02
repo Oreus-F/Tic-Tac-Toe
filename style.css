@@ -378,8 +378,8 @@ span.faulty-text{
 }
 
 .cell{
-    width: 14rem;
-    height: 14rem;
+    width: clamp(10rem, 10vw ,14rem);
+    height: clamp(10rem, 10vw ,14rem);
     background: none;
     border: 2px solid var(--main-additionnal-color);
     box-shadow: inset 0 0 .5rem var(--main-additionnal-color);
