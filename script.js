@@ -248,8 +248,7 @@ const GameControl = function(){
     const check = CheckVictory();
     
     const container = document.querySelector("#container");
-    const newGameButton = document.querySelector("#askNewGame");
-    const resetButton = document.querySelector("#reset");
+    const buttonsContainer = document.querySelector(".additionnalButton");
     
     const p1Score = document.querySelector("#p1Score");
     const p2Score = document.querySelector("#p2Score");
@@ -322,9 +321,8 @@ const GameControl = function(){
         updateScore();
         
         p1Score.getAttribute("class") === "activeTurn" ? p1Score.classList.toggle("activeTurn") : p2Score.classList.toggle("activeTurn");
-
-        newGameButton.classList.toggle("hidden");
-        resetButton.classList.toggle("hidden");
+        buttonsContainer.classList.toggle("hidden")
+        
         
     };
 
@@ -402,6 +400,8 @@ const ScreenControl = function(){
     
     
     const container = document.querySelector("#container");
+    const buttonsContainer = document.querySelector(".additionnalButton");
+
     const newGameButton = document.querySelector("#askNewGame");
     const newPlayerData= document.querySelector("#newPlayerData");
     const resetButton = document.querySelector("#reset");
@@ -442,8 +442,6 @@ const ScreenControl = function(){
     }
     
     
-    newGameButton.addEventListener("click", function(){initNewGame()});
-    resetButton.addEventListener("click", function(){resetGame()});
     
     
     newPlayerData.addEventListener("submit", function(event){
@@ -457,15 +455,13 @@ const ScreenControl = function(){
     
     
     const initNewGame = function(){
-        if(resetButton.getAttribute("class") !== "hidden"){resetButton.classList.toggle("hidden")}
-        newGameButton.classList.toggle("hidden");
-        newPlayerData.classList.toggle("hidden");
+        buttonsContainer.classList.toggle("hidden");
+        newPlayerData.classList.toggle("hidden")
     }
     
     
     const resetGame = function(){
-        newGameButton.classList.toggle("hidden");
-        resetButton.classList.toggle("hidden");
+        buttonsContainer.classList.toggle("hidden");
         game.rematch();
         newDisplay();
     };
@@ -476,6 +472,8 @@ const ScreenControl = function(){
     };
     
     
+    newGameButton.addEventListener("click", function(){initNewGame()});
+    resetButton.addEventListener("click", function(){resetGame()});
     
     
     const initDisplay = (function(){
