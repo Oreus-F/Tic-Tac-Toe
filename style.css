@@ -374,6 +374,8 @@ span.faulty-text{
     grid-template-rows: repeat(3, 1fr);
 
 
+    margin-top: -2rem;
+
 }
 
 .cell{
