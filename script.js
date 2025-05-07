@@ -4,8 +4,6 @@ const Gameboard = function(){
     const board = [];
     
     
-    
-    
     for (let i = 0; i< grid; i++){
         board[i] = []
         for (let j = 0; j< grid; j++){
@@ -341,9 +339,7 @@ const GameControl = function(){
         if(check.win(temoin)){
 
             let result = check.win(temoin);
-            console.log(result)
             result = result.temoin;
-            console.log(result)
             winPoint();
             stopGame(result);
             
